@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/DECORATION/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd"
+    name="Terremark API">
+    <body>
+        <menu name="Overview">
+            <item name="Introduction" href="index.html"/>
+            <item name="Goals" href="goals.html"/>
+            <item name="FAQ" href="faq.html"/>
+            <item name="eCloud API" href="eCloud_API_r2_12.pdf"/>
+            <item name="API Explorer" href="Cloud_API_Explorer_r2_12.pdf"/>
+            <item name="Explorer link" href="https://services.enterprisecloud.terremark.com/Cloudapi/Explorer"/>
+        </menu>
+        <menu name="Examples">
+            <item name="Authentication" href="auth.html"/>
+            <item name="Organization" href="org.html"/>
+            <item name="Virtual Machine" href="vm.html"/>
+        </menu>
+        <menu ref="reports"/>
+    </body>
+</project>

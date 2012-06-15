@@ -1,0 +1,2979 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--XSD Transformation 3/19/2012 5:07:02 PM-->
+<!--Xslt Translation-->
+<!--Type Name Translation-->
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="AlertResolutionStatusEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Open" />
+      <xs:enumeration value="Closed" />
+      <xs:enumeration value="OneTime" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AlertTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Alarm" />
+      <xs:enumeration value="Incident" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Action">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="actionDisabled" nillable="true" type="ActionDisabledStatus" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required" />
+    <xs:attribute name="href" type="xs:string" use="required" />
+    <xs:attribute name="type" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="ActionDisabledStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="disabled" />
+      <xs:enumeration value="noAccess" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Resource">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Links" nillable="true" type="ArrayOfLink" />
+      <xs:element minOccurs="0" name="Actions" nillable="true" type="ArrayOfAction" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="href" type="xs:string" />
+    <xs:attribute name="type" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="ArrayOfLink">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Link" nillable="true" type="Link" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Link">
+    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="href" type="xs:string" use="required" />
+    <xs:attribute name="type" type="xs:string" />
+    <xs:attribute name="rel" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="ArrayOfAction">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Action" nillable="true" type="Action" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Alert">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AlertRuleTemplate" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="AlertSource" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="DurationInMinutes" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="StartTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="EndTime" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Status" type="AlertResolutionStatusEnum" />
+          <xs:element minOccurs="0" name="AlertType" type="AlertTypeEnum" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Reference">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="accessible" nillable="true" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="href" type="xs:string" use="required" />
+    <xs:attribute name="type" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="AlertEvent">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Reading" nillable="true" type="ResourceCapacity" />
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="EventType" type="AlertEventTypeEnum" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ResourceCapacity">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Unit" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="AlertEventTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Alarm" />
+      <xs:enumeration value="StartIncident" />
+      <xs:enumeration value="InIncident" />
+      <xs:enumeration value="EndIncident" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="AlertEvents">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TotalCount" type="xs:int" />
+      <xs:element minOccurs="0" name="PageCount" type="xs:int" />
+      <xs:element minOccurs="0" name="CurrentPage" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AlertEvent" nillable="true" type="AlertEvent" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AlertLog">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TotalCount" type="xs:int" />
+      <xs:element minOccurs="0" name="PageCount" type="xs:int" />
+      <xs:element minOccurs="0" name="CurrentPage" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Alert" nillable="true" type="Alert" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DetachDiskRetryOperation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DetachedDisk" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="VirtualMachine" nillable="true" type="Reference" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="EnabledValue">
+    <xs:sequence>
+      <xs:element name="Enabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Unit" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Entity">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Tasks" nillable="true" type="Tasks" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Tasks">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TotalCount" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Task" nillable="true" type="Task" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Task">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Operation" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Status" nillable="true" type="TaskStatus" />
+          <xs:element minOccurs="0" name="ImpactedItem" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="StartTime" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="CompletedTime" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Notes" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="InitiatedBy" nillable="true" type="Reference" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="TaskStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Queued" />
+      <xs:enumeration value="Running" />
+      <xs:enumeration value="Error" />
+      <xs:enumeration value="Complete" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Location">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FriendlyName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Locode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ISO3166" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Organization">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Locations" nillable="true" type="Locations" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Locations">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Location" nillable="true" type="OrganizationLocation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OrganizationLocation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Catalog" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="Environments" nillable="true" type="EnvironmentReferences" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="EnvironmentReferences">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Environment" nillable="true" type="Reference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Organizations">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Organization" nillable="true" type="Organization" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfOrganization">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Organization" nillable="true" type="Organization" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ResourceCapacityRange">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MinimumSize" nillable="true" type="ResourceCapacity" />
+      <xs:element minOccurs="0" name="MaximumSize" nillable="true" type="ResourceCapacity" />
+      <xs:element minOccurs="0" name="StepFactor" nillable="true" type="ResourceCapacity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SupportedVersions">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VersionInfo" nillable="true" type="VersionInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VersionInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Version" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Deprecated" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Threshold">
+    <xs:complexContent mixed="false">
+      <xs:extension base="ResourceCapacity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CompareType" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Time">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CurrentServerTime" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AdminOrganization">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="SshKeys" nillable="true" type="SshKeyReferenceList" />
+          <xs:element minOccurs="0" name="MultifactorSummary" nillable="true" type="MultifactorSummary" />
+          <xs:element minOccurs="0" name="SupportAccess" nillable="true" type="SupportAccess" />
+          <xs:element minOccurs="0" name="PasswordComplexityRules" nillable="true" type="PasswordComplexityRules" />
+          <xs:element minOccurs="0" name="LoginBanner" nillable="true" type="LoginBanner" />
+          <xs:element minOccurs="0" name="AuthenticationLevels" nillable="true" type="AuthenticationLevels" />
+          <xs:element minOccurs="0" name="AlertNotification" nillable="true" type="AlertNotification" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SshKeyReferenceList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SshKey" nillable="true" type="SshKeyReference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SshKeyReference">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Reference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Default" nillable="true" type="xs:boolean" />
+          <xs:element minOccurs="0" name="FingerPrint" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="MultifactorSummary">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Purchased" type="xs:int" />
+      <xs:element minOccurs="0" name="Used" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SupportAccess">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Status" type="SupportAccessStatus" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="SupportAccessStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Enabled" />
+      <xs:enumeration value="Disabled" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="PasswordComplexityRules">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element name="RuleType" type="PasswordComplexityRuleTypeEnum" />
+          <xs:element minOccurs="0" name="CustomRules" nillable="true" type="CustomPasswordRules" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="PasswordComplexityRuleTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Default" />
+      <xs:enumeration value="Custom" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="CustomPasswordRules">
+    <xs:sequence>
+      <xs:element name="MinimumCharacters" nillable="true" type="EnabledValue" />
+      <xs:element name="MinimumUpperCaseCharacters" nillable="true" type="EnabledValue" />
+      <xs:element name="MinimumLowerCaseCharacters" nillable="true" type="EnabledValue" />
+      <xs:element name="MinimumNumericCharacters" nillable="true" type="EnabledValue" />
+      <xs:element name="MinimumSpecialCharacters" nillable="true" type="EnabledValue" />
+      <xs:element name="MaximumConsecutiveCharactersFromPriorPassword" nillable="true" type="EnabledValue" />
+      <xs:element name="MinimumLifetimeRestriction" nillable="true" type="EnabledValue" />
+      <xs:element name="MinimumGenerationsBeforeReuse" nillable="true" type="EnabledValue" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LoginBanner">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element name="Display" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AuthenticationLevels">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element name="BasicEnabled" type="xs:boolean" />
+          <xs:element name="HMACSHA1Enabled" type="xs:boolean" />
+          <xs:element name="HMACSHA256Enabled" type="xs:boolean" />
+          <xs:element name="HMACSHA512Enabled" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AlertNotification">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AlertRules" nillable="true" type="AlertRules" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AlertRules">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="AlertRule" nillable="true" type="AlertRule" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfAlertRule">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AlertRule" nillable="true" type="AlertRule" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AlertRule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AlertRuleTemplate" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="RuleGroup" type="AlertRuleGroup" />
+          <xs:element minOccurs="0" name="Threshold" nillable="true" type="Threshold" />
+          <xs:element minOccurs="0" name="RuleAction" type="AlertRuleAction" />
+          <xs:element minOccurs="0" name="Configuration" nillable="true" type="Configuration" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="AlertRuleGroup">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Resources" />
+      <xs:enumeration value="Cloud" />
+      <xs:enumeration value="Billing" />
+      <xs:enumeration value="Devices" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AlertRuleAction">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DoNotMonitor" />
+      <xs:enumeration value="LogOnly" />
+      <xs:enumeration value="NotifyByEmail" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Configuration">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EmailConfiguration" nillable="true" type="NotifyByEmailConfiguration" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NotifyByEmailConfiguration">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Recipients" nillable="true" type="Recipients" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Recipients">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Recipient" nillable="true" type="Recipient" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Recipient">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element name="Email" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AdminOrganizations">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="AdminOrganization" nillable="true" type="AdminOrganization" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfAdminOrganization">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AdminOrganization" nillable="true" type="AdminOrganization" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AlertRuleTemplate">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RuleGroup" type="AlertRuleGroup" />
+          <xs:element minOccurs="0" name="Threshold" nillable="true" type="Threshold" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AlertRuleTemplates">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="AlertRuleTemplate" nillable="true" type="AlertRuleTemplate" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfAlertRuleTemplate">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AlertRuleTemplate" nillable="true" type="AlertRuleTemplate" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ApiKey">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AccessKey" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Status" type="ApiKeyStatus" />
+          <xs:element minOccurs="0" name="PrivateKey" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="ApiKeyStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Active" />
+      <xs:enumeration value="Inactive" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ApiKeys">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="ApiKey" nillable="true" type="ApiKey" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfApiKey">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ApiKey" nillable="true" type="ApiKey" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AuditLog">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TotalCount" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AuditLogItem" nillable="true" type="AuditLogItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AuditLogItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="UserReference" />
+      <xs:element minOccurs="0" name="Action" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Details" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Origin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SourceIp" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Notes" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UserReference">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Reference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="HistoricalUsage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Month" type="xs:int" />
+      <xs:element minOccurs="0" name="Year" type="xs:int" />
+      <xs:element minOccurs="0" name="Billable" nillable="true" type="ResourceCapacity" />
+      <xs:element minOccurs="0" name="Burst" nillable="true" type="ResourceCapacity" />
+      <xs:element minOccurs="0" name="Total" nillable="true" type="ResourceCapacity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BandwidthIpAddressUsage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="In" nillable="true" type="ResourceCapacity" />
+      <xs:element minOccurs="0" name="Out" nillable="true" type="ResourceCapacity" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="BandwidthIpAddressUsages">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="IpAddress" nillable="true" type="BandwidthIpAddressUsage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BandwidthPeriods">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BandwidthPeriod" nillable="true" type="Reference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BandwidthTotalUsage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Billable" nillable="true" type="ResourceCapacity" />
+      <xs:element minOccurs="0" name="Burst" nillable="true" type="ResourceCapacity" />
+      <xs:element minOccurs="0" name="In" nillable="true" type="ResourceCapacity" />
+      <xs:element minOccurs="0" name="Out" nillable="true" type="ResourceCapacity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BandwidthUsage">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="TotalUsage" nillable="true" type="BandwidthTotalUsage" />
+          <xs:element minOccurs="0" name="IpStatistics" nillable="true" type="BandwidthIpAddressUsages" />
+          <xs:element minOccurs="0" name="HistoricalUsages" nillable="true" type="ArrayOfHistoricalUsage" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfHistoricalUsage">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="HistoricalUsage" nillable="true" type="HistoricalUsage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BusinessOperation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BusinessOperationType" type="BusinessOperationTypeEnum" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IsAssignable" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="BusinessOperationTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Organization" />
+      <xs:enumeration value="Environment" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="BusinessOperationReferences">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BusinessOperation" nillable="true" type="Reference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BusinessOperations">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="BusinessOperation" nillable="true" type="BusinessOperation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfBusinessOperation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BusinessOperation" nillable="true" type="BusinessOperation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Contact">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="EmailAddress" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Contacts">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Contact" nillable="true" type="Contact" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfContact">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Contact" nillable="true" type="Contact" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CreateApiKey">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CreateApiUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element name="UserRole" nillable="true" type="UserRole" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UserRole">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="OrganizationRole" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="EnvironmentRoles" nillable="true" type="ArrayOfEnvironmentRole" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfEnvironmentRole">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EnvironmentRole" nillable="true" type="EnvironmentRole" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EnvironmentRole">
+    <xs:sequence>
+      <xs:element name="Environment" nillable="true" type="Reference" />
+      <xs:element minOccurs="0" name="Role" nillable="true" type="Reference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CreateRole">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Active" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RoleType" type="RoleTypeEnum" />
+      <xs:element minOccurs="0" name="BusinessOperations" nillable="true" type="BusinessOperationReferences" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="RoleTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Organization" />
+      <xs:enumeration value="Environment" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="CreateSshKey">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Default" nillable="true" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="CreateTicket">
+    <xs:sequence>
+      <xs:element name="Email" nillable="true" type="xs:string" />
+      <xs:element name="Subject" nillable="true" type="xs:string" />
+      <xs:element name="Details" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CreateUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Contact" nillable="true" type="Reference" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element name="Password" nillable="true" type="xs:string" />
+      <xs:element name="UserRole" nillable="true" type="UserRole" />
+      <xs:element name="UserSecurityQuestions" nillable="true" type="SecurityQuestions" />
+      <xs:element minOccurs="0" name="MultifactorAuthentication" nillable="true" type="MultifactorAuthentication" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="SecurityQuestions">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SecurityQuestion" nillable="true" type="SecurityQuestion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SecurityQuestion">
+    <xs:sequence>
+      <xs:element name="Question" nillable="true" type="xs:string" />
+      <xs:element name="Answer" nillable="true" type="xs:string" />
+      <xs:element name="IsCustom" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MultifactorAuthentication">
+    <xs:sequence>
+      <xs:element name="CountryCode" type="xs:int" />
+      <xs:element name="PrimaryPhone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrimaryExtension" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BackupCountryCode" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BackupPhone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BackupExtension" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Pin" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DeviceTag">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Entity" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeviceTagList">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="DeviceTag" nillable="true" type="DeviceTag" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfDeviceTag">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DeviceTag" nillable="true" type="DeviceTag" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="EnvironmentAccessLevel">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NoAccess" />
+      <xs:enumeration value="ReadOnly" />
+      <xs:enumeration value="User" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="InviteUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Contact" nillable="true" type="Reference" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element name="UserRole" nillable="true" type="UserRole" />
+      <xs:element minOccurs="0" name="MultifactorAuthentication" nillable="true" type="MultifactorAuthentication" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="LifetimeRestriction">
+    <xs:sequence>
+      <xs:element name="Unit" nillable="true" type="xs:string" />
+      <xs:element name="Value" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="QuestionList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Question" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Questions">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Question" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Role">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="RoleType" type="RoleTypeEnum" />
+          <xs:element minOccurs="0" name="Active" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Category" type="RoleCategory" />
+          <xs:element minOccurs="0" name="IsAdminRole" type="xs:boolean" />
+          <xs:element minOccurs="0" name="BusinessOperations" nillable="true" type="BusinessOperationReferences" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="RoleCategory">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="System" />
+      <xs:enumeration value="Custom" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="RoleReference">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Reference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="RoleType" type="RoleTypeEnum" />
+          <xs:element minOccurs="0" name="Active" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Category" type="RoleCategory" />
+          <xs:element minOccurs="0" name="IsAdminRole" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Roles">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Role" nillable="true" type="RoleReference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SshKey">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Default" nillable="true" type="xs:boolean" />
+          <xs:element minOccurs="0" name="FingerPrint" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PrivateKey" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SshKeys">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="SshKey" nillable="true" type="SshKey" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfSshKey">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SshKey" nillable="true" type="SshKey" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Ticket">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Category" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DetectedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Severity" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Device" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Classification" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Owner" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Information" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Solution" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="History" nillable="true" type="ArrayOfTicketHistoryItem" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfTicketHistoryItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TicketHistoryItem" nillable="true" type="TicketHistoryItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TicketHistoryItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Information" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TicketGroups">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Active" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="History" nillable="true" type="Reference" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Tickets">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="TicketReference" nillable="true" type="TicketReference" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfTicketReference">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TicketReference" nillable="true" type="TicketReference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TicketReference">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Reference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Severity" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Device" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="User">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Status" type="UserStatus" />
+          <xs:element minOccurs="0" name="LoginStatus" type="UserLoginStatus" />
+          <xs:element minOccurs="0" name="LastLogin" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="UserRole" nillable="true" type="UserRole" />
+          <xs:element minOccurs="0" name="MultifactorAuthentication" nillable="true" type="MultifactorAuthentication" />
+          <xs:element minOccurs="0" name="IsAdministrator" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsApiUser" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsAlertNotificationEnabled" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsMultifactorAuthenticationEnabled" type="xs:boolean" />
+          <xs:element minOccurs="0" name="ApiKeys" nillable="true" type="ApiKeys" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="UserStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Active" />
+      <xs:enumeration value="Inactive" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="UserLoginStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Active" />
+      <xs:enumeration value="LockedOut" />
+      <xs:enumeration value="AccountReset" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="UserCredentials">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UserSecurityQuestions" nillable="true" type="SecurityQuestions" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="UserReferences">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="UserReference" nillable="true" type="UserReference" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfUserReference">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserReference" nillable="true" type="UserReference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="UserRoleTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Administrator" />
+      <xs:enumeration value="Other" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Users">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="User" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="User" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Environment">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ComputePools" nillable="true" type="ComputePoolReferences" />
+          <xs:element minOccurs="0" name="Networks" nillable="true" type="NetworkReferences" />
+          <xs:element minOccurs="0" name="PhysicalDevices" nillable="true" type="PhysicalDeviceReferences" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ComputePoolReferences">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ComputePool" nillable="true" type="ComputePoolReference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ComputePoolReference">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Reference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="VirtualMachines" nillable="true" type="VirtualMachineReferences" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="VirtualMachineReferences">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VirtualMachine" nillable="true" type="VirtualMachineReference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VirtualMachineReference">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Reference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Status" type="VirtualMachineStatus" />
+          <xs:element minOccurs="0" name="ProcessorCount" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="Memory" nillable="true" type="ResourceCapacity" />
+          <xs:element minOccurs="0" name="Storage" nillable="true" type="ResourceCapacity" />
+          <xs:element minOccurs="0" name="OperatingSystem" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="PoweredOn" nillable="true" type="xs:boolean" />
+          <xs:element minOccurs="0" name="ToolsStatus" nillable="true" type="ToolsStatus" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="VirtualMachineStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotDeployed" />
+      <xs:enumeration value="Deployed" />
+      <xs:enumeration value="Orphaned" />
+      <xs:enumeration value="TaskInProgress" />
+      <xs:enumeration value="CopyInProgress" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ToolsStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotInstalled" />
+      <xs:enumeration value="NotRunning" />
+      <xs:enumeration value="OutOfDate" />
+      <xs:enumeration value="Current" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="NetworkReferences">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Network" nillable="true" type="NetworkReference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NetworkReference">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Reference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="NetworkType" type="NetworkTypeEnum" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="NetworkTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Dmz" />
+      <xs:enumeration value="Internal" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="PhysicalDeviceReferences">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PhysicalDevice" nillable="true" type="Reference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Environments">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Environment" nillable="true" type="Environment" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfEnvironment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Environment" nillable="true" type="Environment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TaskList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Task" nillable="true" type="Task" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CreateLayoutGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Row" nillable="true" type="Reference" />
+      <xs:element minOccurs="0" name="NewRowName" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="CreateLayoutRow">
+    <xs:attribute name="name" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="Device">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Tags" nillable="true" type="Tags" />
+          <xs:element minOccurs="0" name="Layout" nillable="true" type="LayoutReference" />
+          <xs:element minOccurs="0" name="NetworkHost" nillable="true" type="Reference" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Tags">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Tag" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LayoutReference">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Row" nillable="true" type="Reference" />
+      <xs:element minOccurs="0" name="Group" nillable="true" type="Reference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PhysicalServer">
+    <xs:complexContent mixed="false">
+      <xs:extension base="PhysicalDevice">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="SerialNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LightsOutIp" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="OperatingSystem" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="AssignedIpAddresses" nillable="true" type="AssignedIpAddresses" />
+          <xs:element minOccurs="0" name="LicensedSoftware" nillable="true" type="PhysicalDeviceLicensedSoftware" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PhysicalDevice">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Device">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Classification" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Model" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="StorageDevice">
+    <xs:complexContent mixed="false">
+      <xs:extension base="PhysicalDevice">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="SerialNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="AssignedIpAddresses" nillable="true" type="AssignedIpAddresses" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AssignedIpAddresses">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Networks" nillable="true" type="DeviceNetworks" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeviceNetworks">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Network" nillable="true" type="DeviceNetwork" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DeviceNetwork">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IpAddresses" nillable="true" type="DeviceIps" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeviceIps">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="IpAddress" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PhysicalRouter">
+    <xs:complexContent mixed="false">
+      <xs:extension base="PhysicalDevice">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="SerialNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="OutsideIp" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="InsideIp" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="HighAvailabilityRouter">
+    <xs:complexContent mixed="false">
+      <xs:extension base="PhysicalDevice">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="OutsideIp" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="InsideIp" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Devices" nillable="true" type="Devices" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Devices">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Device" nillable="true" type="PhysicalRouterDevice" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PhysicalRouterDevice">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Model" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SerialNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OutsideIp" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InsideIp" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VirtualMachine">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Device">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Status" nillable="true" type="VirtualMachineStatus" />
+          <xs:element minOccurs="0" name="PoweredOn" nillable="true" type="xs:boolean" />
+          <xs:element minOccurs="0" name="HardwareConfiguration" nillable="true" type="HardwareConfiguration" />
+          <xs:element minOccurs="0" name="IpAddresses" nillable="true" type="VirtualMachineIpAddresses" />
+          <xs:element minOccurs="0" name="OperatingSystem" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="ToolsStatus" nillable="true" type="ToolsStatus" />
+          <xs:element minOccurs="0" name="MediaStatus" nillable="true" type="VirtualMachineMediaStatus" />
+          <xs:element minOccurs="0" name="CustomizationPending" nillable="true" type="xs:boolean" />
+          <xs:element minOccurs="0" name="PendingRetryOperation" nillable="true" type="Reference" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="HardwareConfiguration">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ProcessorCount" type="xs:int" />
+          <xs:element minOccurs="0" name="Memory" nillable="true" type="ResourceCapacity" />
+          <xs:element minOccurs="0" name="Disks" nillable="true" type="Disks" />
+          <xs:element minOccurs="0" name="Nics" nillable="true" type="Nics" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Disks">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Disk" nillable="true" type="VirtualDisk" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VirtualDisk">
+    <xs:complexContent mixed="false">
+      <xs:extension base="VirtualDiskBase">
+        <xs:sequence>
+          <xs:element name="Size" nillable="true" type="ResourceCapacity" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="VirtualDiskBase">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Index" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Nics">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Nic" nillable="true" type="VirtualNic" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VirtualNic">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="UnitNumber" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MacAddress" nillable="true" type="xs:string" />
+      <xs:element name="Network" nillable="true" type="NetworkReference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VirtualMachineIpAddresses">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AssignedIpAddresses" nillable="true" type="AssignedIpAddresses" />
+      <xs:element minOccurs="0" name="DetectedIpAddresses" nillable="true" type="DeviceIps" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="VirtualMachineMediaStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unmounted" />
+      <xs:enumeration value="Mounted" />
+      <xs:enumeration value="IsoMounted" />
+      <xs:enumeration value="VmwareToolsMounted" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="PhysicalDeviceLicensedSoftware">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="HourlyLicensedSoftware" nillable="true" type="ArrayOfPhysicalServerSoftwareEntry" />
+      <xs:element minOccurs="0" name="LicenseProvider" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MonthlyLicensedSoftware" nillable="true" type="ArrayOfPhysicalServerSoftwareEntry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfPhysicalServerSoftwareEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PhysicalServerSoftwareEntry" nillable="true" type="PhysicalServerSoftwareEntry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PhysicalServerSoftwareEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LicenseCount" type="xs:int" />
+      <xs:element minOccurs="0" name="CostPerUnit" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DeviceLayout">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Rows" nillable="true" type="Rows" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Rows">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Row" nillable="true" type="LayoutRow" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LayoutRow">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Index" type="xs:int" />
+          <xs:element minOccurs="0" name="Groups" nillable="true" type="Groups" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Groups">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Group" nillable="true" type="LayoutGroup" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LayoutGroup">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Index" type="xs:int" />
+          <xs:element minOccurs="0" name="VirtualMachines" nillable="true" type="VirtualMachineReferences" />
+          <xs:element minOccurs="0" name="PhysicalDevices" nillable="true" type="PhysicalDeviceReferences" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeviceLicensedSoftware">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="HourlyLicensedSoftware" nillable="true" type="Software" />
+      <xs:element minOccurs="0" name="MonthlyLicensedSoftware" nillable="true" type="Software" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Software">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Software" nillable="true" type="SoftwareEntry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SoftwareEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProcessorCountPerUnit" type="xs:int" />
+      <xs:element minOccurs="0" name="CostPerUnit" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="LayoutDirection">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Up" />
+      <xs:enumeration value="Down" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="LayoutRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Row" nillable="true" type="Reference" />
+      <xs:element minOccurs="0" name="Group" nillable="true" type="Reference" />
+      <xs:element minOccurs="0" name="NewRow" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NewGroup" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OperatingSystem">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FamilyName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ConfigurationOptions" nillable="true" type="VirtualMachineConfigurationOptions" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="VirtualMachineConfigurationOptions">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Processor" nillable="true" type="ConfigurationOptionRange" />
+          <xs:element minOccurs="0" name="Memory" nillable="true" type="ResourceCapacityRange" />
+          <xs:element minOccurs="0" name="Disk" nillable="true" type="DiskConfigurationOption" />
+          <xs:element minOccurs="0" name="NetworkAdapter" nillable="true" type="ConfigurationOptionRange" />
+          <xs:element minOccurs="0" name="Customization" nillable="true" type="CustomizationOption" />
+          <xs:element minOccurs="0" name="ComputeMatrix" nillable="true" type="ComputeMatrix" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ConfigurationOptionRange">
+    <xs:sequence>
+      <xs:element name="Minimum" type="xs:int" />
+      <xs:element name="Maximum" type="xs:int" />
+      <xs:element name="StepFactor" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DiskConfigurationOption">
+    <xs:sequence>
+      <xs:element name="Minimum" type="xs:int" />
+      <xs:element name="Maximum" type="xs:int" />
+      <xs:element minOccurs="0" name="SystemDisk" nillable="true" type="DiskConfigurationOptionRange" />
+      <xs:element minOccurs="0" name="DataDisk" nillable="true" type="DiskConfigurationOptionRange" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DiskConfigurationOptionRange">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ResourceCapacityRange" nillable="true" type="ResourceCapacityRange" />
+      <xs:element minOccurs="0" name="MonthlyCost" nillable="true" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CustomizationOption">
+    <xs:sequence>
+      <xs:element name="Type" type="CustomizationTypeEnum" />
+      <xs:element name="CanPowerOn" type="xs:boolean" />
+      <xs:element name="PasswordRequired" type="xs:boolean" />
+      <xs:element name="SshKeyRequired" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="CustomizationTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Windows" />
+      <xs:enumeration value="Linux" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ComputeMatrix">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Entry" nillable="true" type="ComputeMatrixEntry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ComputeMatrixEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ProcessorCount" type="xs:int" />
+      <xs:element minOccurs="0" name="Memory" type="xs:int" />
+      <xs:element minOccurs="0" name="HourlyCost" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OperatingSystems">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="OperatingSystem" nillable="true" type="OperatingSystem" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfOperatingSystem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OperatingSystem" nillable="true" type="OperatingSystem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OperatingSystemFamilies">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="OperatingSystemFamily" nillable="true" type="OperatingSystemFamily" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfOperatingSystemFamily">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OperatingSystemFamily" nillable="true" type="OperatingSystemFamily" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OperatingSystemFamily">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OperatingSystems" nillable="true" type="OperatingSystemReferences" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OperatingSystemReferences">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OperatingSystem" nillable="true" type="Reference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PhysicalDevices">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="PhysicalDevice" nillable="true" type="PhysicalDevice" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfPhysicalDevice">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PhysicalDevice" nillable="true" type="PhysicalDevice" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AttachDisks">
+    <xs:sequence>
+      <xs:element name="DetachedDisks" nillable="true" type="DetachedVirtualDiskReferences" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DetachedVirtualDiskReferences">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DetachedDisk" nillable="true" type="Reference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CopyIdenticalVirtualMachine">
+    <xs:sequence>
+      <xs:element name="Source" nillable="true" type="Reference" />
+      <xs:element minOccurs="0" name="Layout" nillable="true" type="LayoutRequest" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="CopyVirtualMachine">
+    <xs:sequence>
+      <xs:element name="Source" nillable="true" type="Reference" />
+      <xs:element minOccurs="0" name="ProcessorCount" type="xs:int" />
+      <xs:element minOccurs="0" name="Memory" nillable="true" type="ResourceCapacity" />
+      <xs:element minOccurs="0" name="Layout" nillable="true" type="LayoutRequest" />
+      <xs:element minOccurs="0" name="DisableCustomization" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LinuxCustomization" nillable="true" type="LinuxCustomization" />
+      <xs:element minOccurs="0" name="WindowsCustomization" nillable="true" type="WindowsCustomization" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Tags" nillable="true" type="Tags" />
+      <xs:element minOccurs="0" name="PoweredOn" nillable="true" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="LinuxCustomization">
+    <xs:sequence>
+      <xs:element name="NetworkSettings" nillable="true" type="NetworkSettings" />
+      <xs:element minOccurs="0" name="SshKey" nillable="true" type="Reference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NetworkSettings">
+    <xs:sequence>
+      <xs:element name="NetworkAdapterSettings" nillable="true" type="NetworkAdapterSettings" />
+      <xs:element minOccurs="0" name="DnsSettings" nillable="true" type="DnsSettings" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NetworkAdapterSettings">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NetworkAdapter" nillable="true" type="NetworkAdapterSetting" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NetworkAdapterSetting">
+    <xs:sequence>
+      <xs:element name="Network" nillable="true" type="NetworkReference" />
+      <xs:element minOccurs="0" name="IpAddress" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DnsSettings">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PrimaryDns" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SecondaryDns" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WindowsCustomization">
+    <xs:sequence>
+      <xs:element name="NetworkSettings" nillable="true" type="NetworkSettings" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LicenseKey" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CreateVirtualMachineRequest">
+    <xs:sequence>
+      <xs:element name="ProcessorCount" type="xs:int" />
+      <xs:element name="Memory" nillable="true" type="ResourceCapacity" />
+      <xs:element name="Layout" nillable="true" type="LayoutRequest" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Tags" nillable="true" type="Tags" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="ImportVirtualMachine">
+    <xs:complexContent mixed="false">
+      <xs:extension base="CreateVirtualMachineRequest">
+        <xs:sequence>
+          <xs:element name="CatalogEntry" nillable="true" type="Reference" />
+          <xs:element name="NetworkMappings" nillable="true" type="ImportNetworkMappings" />
+          <xs:element minOccurs="0" name="OperatingSystem" nillable="true" type="Reference" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ImportNetworkMappings">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NetworkMapping" nillable="true" type="ImportNetworkMapping" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ImportNetworkMapping">
+    <xs:sequence>
+      <xs:element name="Network" nillable="true" type="Reference" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="CreateBlankVirtualMachine">
+    <xs:complexContent mixed="false">
+      <xs:extension base="CreateVirtualMachineRequest">
+        <xs:sequence>
+          <xs:element name="OperatingSystem" nillable="true" type="Reference" />
+          <xs:element name="Disks" nillable="true" type="Disks" />
+          <xs:element name="NetworkAdapterSettings" nillable="true" type="NetworkAdapterSettings" />
+          <xs:element name="DetachedDisks" nillable="true" type="DetachedVirtualDiskReferences" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CreateGuestProcess">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ProgramPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Arguments" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Interpreter" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Script" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CreateOsTemplateVirtualMachineRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="CreateVirtualMachineRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="LinuxCustomization" nillable="true" type="LinuxCustomization" />
+          <xs:element minOccurs="0" name="WindowsCustomization" nillable="true" type="WindowsCustomization" />
+          <xs:element minOccurs="0" name="PoweredOn" nillable="true" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CreateVirtualMachine">
+    <xs:complexContent mixed="false">
+      <xs:extension base="CreateOsTemplateVirtualMachineRequest">
+        <xs:sequence>
+          <xs:element name="Template" nillable="true" type="Reference" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DetachDisk">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element name="Disk" nillable="true" type="VirtualDiskBase" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="ExportVirtualMachineRequest">
+    <xs:sequence>
+      <xs:element name="CatalogName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GuestProcess">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProcessId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GuestProcesses">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="GuestProcess" nillable="true" type="GuestProcess" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfGuestProcess">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GuestProcess" nillable="true" type="GuestProcess" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MksTicket">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Host" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Port" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="ConfigurationPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Ticket" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Template">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="OperatingSystem" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ComputeMatrix" nillable="true" type="ComputeMatrix" />
+          <xs:element minOccurs="0" name="Processor" nillable="true" type="ConfigurationOptionRange" />
+          <xs:element minOccurs="0" name="Memory" nillable="true" type="ResourceCapacityRange" />
+          <xs:element minOccurs="0" name="Storage" nillable="true" type="TemplateStorage" />
+          <xs:element minOccurs="0" name="NetworkAdapters" type="xs:int" />
+          <xs:element minOccurs="0" name="Customization" nillable="true" type="CustomizationOption" />
+          <xs:element minOccurs="0" name="LicensedSoftware" nillable="true" type="DeviceLicensedSoftware" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TemplateStorage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Size" nillable="true" type="ResourceCapacity" />
+      <xs:element minOccurs="0" name="HourlyCost" nillable="true" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TemplateCategories">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Category" nillable="true" type="TemplateCategory" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TemplateCategory">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OperatingSystems" nillable="true" type="TemplateOperatingSystems" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TemplateOperatingSystems">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OperatingSystem" nillable="true" type="TemplateOperatingSystem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TemplateOperatingSystem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Templates" nillable="true" type="TemplateReferences" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TemplateReferences">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Template" nillable="true" type="Reference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TemplateFamilies">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Family" nillable="true" type="TemplateFamily" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TemplateFamily">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Categories" nillable="true" type="TemplateCategories" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Templates">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Families" nillable="true" type="TemplateFamilies" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="VirtualMachines">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VirtualMachine" nillable="true" type="VirtualMachineReference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CreateRnatAssociation">
+    <xs:sequence>
+      <xs:element name="PublicIp" nillable="true" type="Reference" />
+      <xs:element name="IpAddress" nillable="true" type="Reference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EnvironmentNetworkSummary">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Networks" nillable="true" type="NetworkHostSummary" />
+          <xs:element minOccurs="0" name="PublicIpAddresses" nillable="true" type="PublicIpAddresses" />
+          <xs:element minOccurs="0" name="InternetServices" nillable="true" type="InternetServiceReferences" />
+          <xs:element minOccurs="0" name="NodeServices" nillable="true" type="NodeServiceReferences" />
+          <xs:element minOccurs="0" name="FirewallAcls" nillable="true" type="FirewallAclReferences" />
+          <xs:element minOccurs="0" name="TrustedNetworkGroups" nillable="true" type="TrustedNetworkGroupReferences" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NetworkHostSummary">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Network" nillable="true" type="NetworkHostSummaryNetwork" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NetworkHostSummaryNetwork">
+    <xs:complexContent mixed="false">
+      <xs:extension base="NetworkReference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Hosts" nillable="true" type="NetworkHostSummaryHosts" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NetworkHostSummaryHosts">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Host" nillable="true" type="NetworkHostSummaryHost" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NetworkHostSummaryHost">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IpAddresses" nillable="true" type="IpAddressReferences" />
+          <xs:element minOccurs="0" name="PoweredOn" nillable="true" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Status" nillable="true" type="VirtualMachineStatus" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="IpAddressReferences">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="IpAddress" nillable="true" type="Reference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PublicIpAddresses">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PublicIp" nillable="true" type="PublicIpAddressReference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PublicIpAddressReference">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Reference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IpType" type="PublicIpTypeEnum" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="PublicIpTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="none" />
+      <xs:enumeration value="rnat" />
+      <xs:enumeration value="defaultRnat" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="InternetServiceReferences">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="InternetService" nillable="true" type="Reference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NodeServiceReferences">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NodeService" nillable="true" type="Reference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FirewallAclReferences">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FirewallAcl" nillable="true" type="Reference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TrustedNetworkGroupReferences">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TrustedNetworkGroup" nillable="true" type="Reference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExternalHost">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExternalNetwork">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Size" type="xs:unsignedInt" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IpAddress">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Host" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="DetectedOn" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="RnatAddress" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="Reserved" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="IpAddresses">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="IpAddress" nillable="true" type="IpAddress" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IpAddressReference">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Reference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Network" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="Host" nillable="true" type="Reference" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Network">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="NetworkType" type="NetworkTypeEnum" />
+          <xs:element minOccurs="0" name="BroadcastAddress" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="GatewayAddress" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RnatAddress" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="IpAddresses" nillable="true" type="IpAddresses" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NetworkHost">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Device" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="Networks" nillable="true" type="NetworkHostNetworks" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NetworkHostNetworks">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Network" nillable="true" type="NetworkHostNetwork" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NetworkHostNetwork">
+    <xs:complexContent mixed="false">
+      <xs:extension base="NetworkReference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IpAddresses" nillable="true" type="NetworkHostIpAddresses" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NetworkHostIpAddresses">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="IpAddress" nillable="true" type="NetworkHostIpAddress" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NetworkHostIpAddress">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Reference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="NodeServices" nillable="true" type="ArrayOfNodeService" />
+          <xs:element minOccurs="0" name="FirewallAcls" nillable="true" type="ArrayOfFirewallAcl" />
+          <xs:element minOccurs="0" name="FirewallLog" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="Rnat" nillable="true" type="Reference" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfNodeService">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NodeService" nillable="true" type="NodeService" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NodeService">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IpAddress" nillable="true" type="IpAddressReference" />
+          <xs:element minOccurs="0" name="Protocol" type="ProtocolTypeEnum" />
+          <xs:element minOccurs="0" name="Port" type="xs:unsignedInt" />
+          <xs:element name="Enabled" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="ProtocolTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="HTTP" />
+      <xs:enumeration value="HTTPS" />
+      <xs:enumeration value="TCP" />
+      <xs:enumeration value="UDP" />
+      <xs:enumeration value="IPSEC" />
+      <xs:enumeration value="FTP" />
+      <xs:enumeration value="Any" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfFirewallAcl">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FirewallAcl" nillable="true" type="FirewallAcl" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FirewallAcl">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Permission" type="AclPermissionTypeEnum" />
+          <xs:element minOccurs="0" name="AclType" type="AclTypeEnum" />
+          <xs:element minOccurs="0" name="PortType" type="AclPortTypeEnum" />
+          <xs:element minOccurs="0" name="Protocol" type="ProtocolTypeEnum" />
+          <xs:element minOccurs="0" name="Source" nillable="true" type="FirewallAclEndpoint" />
+          <xs:element minOccurs="0" name="Destination" nillable="true" type="FirewallAclEndpoint" />
+          <xs:element minOccurs="0" name="PortRange" nillable="true" type="PortRange" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="AclPermissionTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="allow" />
+      <xs:enumeration value="deny" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AclTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="internetService" />
+      <xs:enumeration value="custom" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AclPortTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Any" />
+      <xs:enumeration value="Specific" />
+      <xs:enumeration value="Range" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="FirewallAclEndpoint">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Type" type="FirewallAclEndpointTypeEnum" />
+      <xs:element minOccurs="0" name="ExternalIpAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExternalNetwork" nillable="true" type="ExternalNetwork" />
+      <xs:element minOccurs="0" name="IpAddress" nillable="true" type="IpAddressReference" />
+      <xs:element minOccurs="0" name="Network" nillable="true" type="NetworkReference" />
+      <xs:element minOccurs="0" name="TrustedNetworkGroup" nillable="true" type="Reference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="FirewallAclEndpointTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Any" />
+      <xs:enumeration value="IpAddress" />
+      <xs:enumeration value="Network" />
+      <xs:enumeration value="ExternalIp" />
+      <xs:enumeration value="ExternalNetwork" />
+      <xs:enumeration value="TrustedNetworkGroup" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="PortRange">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Start" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="End" type="xs:unsignedInt" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Networks">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Network" nillable="true" type="NetworkReference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NetworkRnat">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Network" nillable="true" type="NetworkReference" />
+          <xs:element minOccurs="0" name="Rnat" nillable="true" type="Reference" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PublicIp">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="PublicIpType" type="PublicIpTypeEnum" />
+          <xs:element minOccurs="0" name="InternetServices" nillable="true" type="ArrayOfInternetService" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfInternetService">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="InternetService" nillable="true" type="InternetService" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InternetService">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Protocol" type="ProtocolTypeEnum" />
+          <xs:element minOccurs="0" name="Port" type="xs:unsignedInt" />
+          <xs:element name="Enabled" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PublicIp" nillable="true" type="Reference" />
+          <xs:element name="Persistence" nillable="true" type="InternetServicePersistence" />
+          <xs:element minOccurs="0" name="RedirectUrl" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Monitor" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="TrustedNetworkGroup" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="BackupInternetService" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="NodeServices" nillable="true" type="ArrayOfNodeService" />
+          <xs:element minOccurs="0" name="LoadBalancingMethod" nillable="true" type="LoadBalancingMethod" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="InternetServicePersistence">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Type" type="PersistenceTypeEnum" />
+      <xs:element minOccurs="0" name="Timeout" nillable="true" type="xs:unsignedInt" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="PersistenceTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="SourceIp" />
+      <xs:enumeration value="SslSession" />
+      <xs:enumeration value="CookieInsert" />
+      <xs:enumeration value="SessionCookie" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="LoadBalancingMethod">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="RoundRobin" />
+      <xs:enumeration value="LeastConnection" />
+      <xs:enumeration value="LeastResponseTime" />
+      <xs:enumeration value="LeastPackets">
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Rnat">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Default" type="xs:boolean" />
+          <xs:element minOccurs="0" name="PublicIp" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="Networks" nillable="true" type="NetworkReferences" />
+          <xs:element minOccurs="0" name="Associations" nillable="true" type="RnatHostAssociations" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="RnatHostAssociations">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Association" nillable="true" type="RnatHostAssociation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RnatHostAssociation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IpAddress" nillable="true" type="IpAddressReference" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="RnatConfiguration">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Networks" nillable="true" type="ArrayOfNetworkRnat" />
+          <xs:element minOccurs="0" name="Rnats" nillable="true" type="ArrayOfRnat" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfNetworkRnat">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NetworkRnat" nillable="true" type="NetworkRnat" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfRnat">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Rnat" nillable="true" type="Rnat" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BackupInternetService">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Protocol" type="ProtocolTypeEnum" />
+          <xs:element minOccurs="0" name="Enabled" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element name="Persistence" nillable="true" type="InternetServicePersistence" />
+          <xs:element minOccurs="0" name="RedirectUrl" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="InternetServices" nillable="true" type="InternetServiceReferences" />
+          <xs:element minOccurs="0" name="NodeServices" nillable="true" type="ArrayOfNodeService" />
+          <xs:element minOccurs="0" name="LoadBalancingMethod" nillable="true" type="LoadBalancingMethod" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BackupInternetServiceReference">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Reference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Protocol" type="ProtocolTypeEnum" />
+          <xs:element minOccurs="0" name="Enabled" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BackupInternetServiceReferences">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BackupInternetService" nillable="true" type="BackupInternetServiceReference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BackupInternetServices">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="BackupInternetService" nillable="true" type="BackupInternetService" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfBackupInternetService">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BackupInternetService" nillable="true" type="BackupInternetService" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InternetServiceMonitor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="HttpMonitor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="ConfigurableInternetServiceMonitor">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="RequestUri" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="HttpHeaders" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ResponseCodes" nillable="true" type="HttpMonitorResponseCodes" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ConfigurableInternetServiceMonitor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="InternetServiceMonitor">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Interval" type="xs:unsignedInt" />
+          <xs:element minOccurs="0" name="ResponseTimeout" type="xs:unsignedInt" />
+          <xs:element minOccurs="0" name="Retries" type="xs:unsignedInt" />
+          <xs:element minOccurs="0" name="Downtime" type="xs:unsignedInt" />
+          <xs:element minOccurs="0" name="Enabled" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PingMonitor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="ConfigurableInternetServiceMonitor" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="EcvMonitor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="ConfigurableInternetServiceMonitor">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="SendString" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="HttpHeaders" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ReceiveString" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LoopbackMonitor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="InternetServiceMonitor" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DefaultMonitor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="InternetServiceMonitor" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="HttpMonitorResponseCodes">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ResponseCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CreateBackupInternetService">
+    <xs:sequence>
+      <xs:element name="Protocol" type="ProtocolTypeEnum" />
+      <xs:element name="Enabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Persistence" nillable="true" type="InternetServicePersistence" />
+      <xs:element minOccurs="0" name="RedirectUrl" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LoadBalancingMethod" nillable="true" type="LoadBalancingMethod" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="CreateInternetServiceMonitorRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Interval" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="ResponseTimeout" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="Retries" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="Downtime" type="xs:unsignedInt" />
+      <xs:element name="Enabled" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CreateEcvMonitor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="CreateInternetServiceMonitorRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="SendString" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="HttpHeaders" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ReceiveString" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CreateHttpMonitor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="CreateInternetServiceMonitorRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="RequestUri" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="HttpHeaders" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ResponseCodes" nillable="true" type="HttpMonitorResponseCodes" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CreateInternetService">
+    <xs:sequence>
+      <xs:element name="Protocol" type="ProtocolTypeEnum" />
+      <xs:element name="Port" type="xs:unsignedInt" />
+      <xs:element name="Enabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Persistence" nillable="true" type="InternetServicePersistence" />
+      <xs:element minOccurs="0" name="RedirectUrl" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TrustedNetworkGroup" nillable="true" type="Reference" />
+      <xs:element minOccurs="0" name="BackupInternetService" nillable="true" type="Reference" />
+      <xs:element minOccurs="0" name="LoadBalancingMethod" nillable="true" type="LoadBalancingMethod" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="CreateNodeService">
+    <xs:sequence>
+      <xs:element name="IpAddress" nillable="true" type="Reference" />
+      <xs:element name="Port" type="xs:unsignedInt" />
+      <xs:element name="Enabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="CreatePingMonitor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="CreateInternetServiceMonitorRequest" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CreateFirewallAcl">
+    <xs:sequence>
+      <xs:element name="Permission" type="AclPermissionTypeEnum" />
+      <xs:element name="Protocol" type="ProtocolTypeEnum" />
+      <xs:element name="Source" nillable="true" type="FirewallAclEndpoint" />
+      <xs:element minOccurs="0" name="Destination" nillable="true" type="FirewallAclEndpoint" />
+      <xs:element minOccurs="0" name="PortRange" nillable="true" type="PortRange" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CreateTrustedNetworkGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Hosts" nillable="true" type="TrustedNetworkGroupHosts" />
+      <xs:element minOccurs="0" name="Networks" nillable="true" type="TrustedNetworkGroupNetworks" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="TrustedNetworkGroupHosts">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="IpAddress" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TrustedNetworkGroupNetworks">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Network" nillable="true" type="ExternalNetwork" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FirewallAcls">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="FirewallAcl" nillable="true" type="FirewallAcl" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="FirewallLog">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IpAddress" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="ExternalIpAddress" nillable="true" type="ExternalHost" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TrustedNetworkGroup">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Hosts" nillable="true" type="TrustedNetworkGroupHosts" />
+          <xs:element minOccurs="0" name="Networks" nillable="true" type="TrustedNetworkGroupNetworks" />
+          <xs:element minOccurs="0" name="InternetServices" nillable="true" type="InternetServiceReferences" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TrustedNetworkGroups">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="TrustedNetworkGroup" nillable="true" type="TrustedNetworkGroup" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfTrustedNetworkGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TrustedNetworkGroup" nillable="true" type="TrustedNetworkGroup" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AttachDiskRetryOperation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DetachedDisk" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="VirtualMachine" nillable="true" type="Reference" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ComputePool">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="VirtualMachines" nillable="true" type="VirtualMachineReferences" />
+          <xs:element minOccurs="0" name="Purchased" nillable="true" type="ComputePoolCapacity" />
+          <xs:element minOccurs="0" name="CpuBurst" nillable="true" type="ResourceBurst" />
+          <xs:element minOccurs="0" name="MemoryBurst" nillable="true" type="ResourceBurst" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ComputePoolCapacity">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cpu" nillable="true" type="ResourceCapacity" />
+      <xs:element minOccurs="0" name="Memory" nillable="true" type="ResourceCapacity" />
+      <xs:element minOccurs="0" name="Storage" nillable="true" type="ResourceCapacity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ResourceBurst">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Actions" nillable="true" type="ArrayOfAction" />
+      <xs:element minOccurs="0" name="Status" type="ResourceBurstStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ResourceBurstStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Disabled" />
+      <xs:enumeration value="Enabled" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ComputePoolCpuUsage">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="StartTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="EndTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="CpuUsageDetailSummary" nillable="true" type="CpuUsageDetails" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CpuUsageDetails">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CpuUsageDetail" nillable="true" type="ComputePoolCpuUsageDetailSummaryEntry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ComputePoolCpuUsageDetailSummaryEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Time" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="ResourceCapacity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ComputePoolCpuUsageDetail">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Time" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Value" nillable="true" type="ResourceCapacity" />
+          <xs:element minOccurs="0" name="VirtualMachines" nillable="true" type="CpuUsage_VirtualMachines" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CpuUsage_VirtualMachines">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VirtualMachine" nillable="true" type="VirtualMachineCpuUsageDetail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VirtualMachineCpuUsageDetail">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Reference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Usage" nillable="true" type="ResourceCapacity" />
+          <xs:element minOccurs="0" name="Utilization" type="xs:int" />
+          <xs:element minOccurs="0" name="Deleted" nillable="true" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ComputePools">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ComputePool" nillable="true" type="ComputePoolReference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ComputePoolMemoryUsage">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="StartTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="EndTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="MemoryUsageDetailSummary" nillable="true" type="MemoryUsageDetails" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="MemoryUsageDetails">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MemoryUsageDetail" nillable="true" type="ComputePoolMemoryUsageDetailSummaryEntry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ComputePoolMemoryUsageDetailSummaryEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Time" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="ResourceCapacity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ComputePoolMemoryUsageDetail">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Time" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Value" nillable="true" type="ResourceCapacity" />
+          <xs:element minOccurs="0" name="VirtualMachines" nillable="true" type="MemoryUsage_VirtualMachines" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="MemoryUsage_VirtualMachines">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VirtualMachine" nillable="true" type="VirtualMachineMemoryUsageDetail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VirtualMachineMemoryUsageDetail">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Reference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Usage" nillable="true" type="ResourceCapacity" />
+          <xs:element minOccurs="0" name="Utilization" type="xs:int" />
+          <xs:element minOccurs="0" name="Deleted" nillable="true" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ComputePoolPerformanceStatistic">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cpu" nillable="true" type="Reference" />
+      <xs:element minOccurs="0" name="Memory" nillable="true" type="Reference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ComputePoolPerformanceStatistics">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Hourly" nillable="true" type="ComputePoolPerformanceStatistic" />
+          <xs:element minOccurs="0" name="Daily" nillable="true" type="ComputePoolPerformanceStatistic" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ComputePoolResourceSummary">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="StartTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="EndTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Cpu" nillable="true" type="CpuComputeResourceSummary" />
+          <xs:element minOccurs="0" name="Memory" nillable="true" type="MemoryComputeResourceSummary" />
+          <xs:element minOccurs="0" name="Storage" nillable="true" type="StorageResourceSummary" />
+          <xs:element minOccurs="0" name="VirtualMachines" nillable="true" type="VirtualMachineResourceSummary" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CpuComputeResourceSummary">
+    <xs:complexContent mixed="false">
+      <xs:extension base="ComputeResourceSummary">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Count" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="PoweredOnCount" nillable="true" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ComputeResourceSummary">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Allocated" nillable="true" type="ResourceCapacity" />
+      <xs:element minOccurs="0" name="Consumed" nillable="true" type="ResourceCapacity" />
+      <xs:element minOccurs="0" name="Purchased" nillable="true" type="ResourceCapacity" />
+      <xs:element minOccurs="0" name="Utilization" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MemoryComputeResourceSummary">
+    <xs:complexContent mixed="false">
+      <xs:extension base="ComputeResourceSummary" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="StorageResourceSummary">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Purchased" nillable="true" type="ResourceCapacity" />
+      <xs:element minOccurs="0" name="Used" nillable="true" type="ResourceCapacity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VirtualMachineResourceSummary">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Count" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="PoweredOnCount" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ComputePoolResourceSummaryList">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="ComputePoolResourceSummary" nillable="true" type="ComputePoolResourceSummary" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfComputePoolResourceSummary">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ComputePoolResourceSummary" nillable="true" type="ComputePoolResourceSummary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ComputePoolStorageUsageDetail">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Allocated" nillable="true" type="ResourceCapacity" />
+          <xs:element minOccurs="0" name="VirtualMachines" nillable="true" type="StorageDetails_VirtualMachines" />
+          <xs:element minOccurs="0" name="DetachedDisks" nillable="true" type="DetachedDiskReferenceList" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="StorageDetails_VirtualMachines">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VirtualMachine" nillable="true" type="VirtualMachineStorageUsageDetail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VirtualMachineStorageUsageDetail">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Reference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DiskCount" type="xs:int" />
+          <xs:element minOccurs="0" name="Allocated" nillable="true" type="ResourceCapacity" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DetachedDiskReferenceList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DetachedDisk" nillable="true" type="DetachedDiskReference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DetachedDiskReference">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Reference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Size" nillable="true" type="ResourceCapacity" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DetachedDisk">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Tasks" nillable="true" type="Tasks" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LastKnownVirtualMachineConfiguration" nillable="true" type="SourceVirtualMachine" />
+          <xs:element minOccurs="0" name="DiskType" type="DetachedDiskTypeEnum" />
+          <xs:element minOccurs="0" name="Size" nillable="true" type="ResourceCapacity" />
+          <xs:element minOccurs="0" name="Status" type="DetachedDiskStatus" />
+          <xs:element minOccurs="0" name="PendingRetryOperation" nillable="true" type="Reference" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SourceVirtualMachine">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ProcessorCount" type="xs:int" />
+      <xs:element minOccurs="0" name="Memory" nillable="true" type="ResourceCapacity" />
+      <xs:element minOccurs="0" name="OperatingSystem" nillable="true" type="Reference" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="DetachedDiskTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="System" />
+      <xs:enumeration value="Data" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DetachedDiskStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Available" />
+      <xs:enumeration value="AttachInProgress" />
+      <xs:enumeration value="DetachInProgress" />
+      <xs:enumeration value="DeleteInProgress" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DetachedDisks">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="DetachedDisk" nillable="true" type="DetachedDisk" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfDetachedDisk">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DetachedDisk" nillable="true" type="DetachedDisk" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PerformanceStatistic">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Time" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Used" nillable="true" type="ResourceCapacity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PerformanceStatistics">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="StartTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="EndTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="VirtualMachines" nillable="true" type="VirtualMachinePerformanceStatistics" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="VirtualMachinePerformanceStatistics">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VirtualMachine" nillable="true" type="VirtualMachinePerformanceStatistic" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VirtualMachinePerformanceStatistic">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Reference">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="PerformanceStatistic" nillable="true" type="PerformanceStatistic" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfPerformanceStatistic">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PerformanceStatistic" nillable="true" type="PerformanceStatistic" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="Unit">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="MB" />
+      <xs:enumeration value="MHz" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Catalog">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Locations" nillable="true" type="CatalogLocations" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CatalogLocations">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Location" nillable="true" type="CatalogLocation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CatalogLocation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Storage" nillable="true" type="CatalogStorage" />
+          <xs:element minOccurs="0" name="Catalog" nillable="true" type="CatalogEntries" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CatalogStorage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Capacity" nillable="true" type="ResourceCapacity" />
+      <xs:element minOccurs="0" name="Used" nillable="true" type="ResourceCapacity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CatalogEntries">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CatalogEntry" nillable="true" type="CatalogEntry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CatalogEntry">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Status" type="CatalogEntryStatus" />
+          <xs:element minOccurs="0" name="Alerts" nillable="true" type="CatalogAlerts" />
+          <xs:element minOccurs="0" name="Files" nillable="true" type="CatalogItemFiles" />
+          <xs:element minOccurs="0" name="Configuration" nillable="true" type="Reference" />
+          <xs:element minOccurs="0" name="CatalogType" type="CatalogEntryTypeEnum" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="CatalogEntryStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Active" />
+      <xs:enumeration value="Validated" />
+      <xs:enumeration value="Failed" />
+      <xs:enumeration value="Completed" />
+      <xs:enumeration value="Validating" />
+      <xs:enumeration value="Unknown" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="CatalogAlerts">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Alert" nillable="true" type="CatalogAlert" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CatalogAlert">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Type" type="CatalogAlertTypeEnum" />
+      <xs:element minOccurs="0" name="Details" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="CatalogAlertTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Info" />
+      <xs:enumeration value="Warning" />
+      <xs:enumeration value="Error" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="CatalogItemFiles">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="File" nillable="true" type="CatalogItemFile" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CatalogItemFile">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="UploadUrl" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Size" nillable="true" type="ResourceCapacity" />
+      <xs:element minOccurs="0" name="BytesTransferred" type="xs:long" />
+      <xs:element minOccurs="0" name="Status" type="FileUploadStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="FileUploadStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Ready" />
+      <xs:enumeration value="InProgress" />
+      <xs:enumeration value="Failed" />
+      <xs:enumeration value="Verified" />
+      <xs:enumeration value="Completed" />
+      <xs:enumeration value="Stopped" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CatalogEntryTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Upload" />
+      <xs:enumeration value="Export" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="CatalogEntryConfiguration">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ProcessorCount" type="xs:int" />
+          <xs:element minOccurs="0" name="Memory" nillable="true" type="ResourceCapacity" />
+          <xs:element minOccurs="0" name="OperatingSystem" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Disks" nillable="true" type="Disks" />
+          <xs:element minOccurs="0" name="NetworkAdapters" type="xs:int" />
+          <xs:element minOccurs="0" name="NetworkMappings" nillable="true" type="CatalogNetworkMappings" />
+          <xs:element minOccurs="0" name="LicensedBy" type="CatalogItemLicensedBy" />
+          <xs:element minOccurs="0" name="LicenseType" type="CatalogItemLicenseTypeEnum" />
+          <xs:element minOccurs="0" name="LicenseCost" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CatalogNetworkMappings">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NetworkMapping" nillable="true" type="CatalogNetworkMapping" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CatalogNetworkMapping">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="CatalogItemLicensedBy">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ServiceProvider" />
+      <xs:enumeration value="Customer" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CatalogItemLicenseTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Template" />
+      <xs:enumeration value="Custom" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="CatalogLog">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Resource">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="CatalogLogEntry" nillable="true" type="CatalogLogEntry" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfCatalogLogEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CatalogLogEntry" nillable="true" type="CatalogLogEntry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CatalogLogEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="UserReference" />
+      <xs:element minOccurs="0" name="Location" nillable="true" type="Reference" />
+      <xs:element minOccurs="0" name="CatalogEntryName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Event" type="CatalogLogEvent" />
+      <xs:element minOccurs="0" name="File" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="CatalogLogEvent">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CatalogCreated" />
+      <xs:enumeration value="CatalogDeleted" />
+      <xs:enumeration value="UploadStarted" />
+      <xs:enumeration value="UploadFinished" />
+      <xs:enumeration value="CopyServerStarted" />
+      <xs:enumeration value="CopyServerFinished" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="CreateCatalogEntry">
+    <xs:sequence>
+      <xs:element name="Location" nillable="true" type="Reference" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required" />
+  </xs:complexType>
+</xs:schema>

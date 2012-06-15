@@ -81,19 +81,6 @@
         </mailingList>
     </mailingLists>
 
-    <repositories>
-        <!--
-        <repository>
-            <id>apache.snapshots</id>
-            <url>http://repository.apache.org/snapshots</url>
-        </repository>
-        -->
-        <repository>
-            <id>intranet.apache.snapshots</id>
-            <url>http://192.168.20.111:8081/nexus/content/repositories/apache-snapshots</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <!-- Build and runtime dependencies -->
         <dependency>

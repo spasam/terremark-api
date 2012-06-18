@@ -3,7 +3,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.terremark.api</groupId>
+    <groupId>com.terremark</groupId>
     <artifactId>terremark-api</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -22,7 +22,6 @@
         <url>http://www.terremark.com</url>
     </organization>
 
-    <!-- TODO FIXME XXX -->
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -86,12 +85,12 @@
         <dependency>
             <groupId>org.apache.wink</groupId>
             <artifactId>wink-client-apache-httpclient</artifactId>
-            <version>1.2.0-incubating-SNAPSHOT</version>
+            <version>1.2.0-incubating</version>
         </dependency>
         <dependency>
             <groupId>org.apache.wink</groupId>
             <artifactId>wink-client</artifactId>
-            <version>1.2.0-incubating-SNAPSHOT</version>
+            <version>1.2.0-incubating</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -169,6 +168,14 @@
             </testResource>
         </testResources>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12</version>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>

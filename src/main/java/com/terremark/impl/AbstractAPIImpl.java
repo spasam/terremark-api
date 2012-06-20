@@ -64,6 +64,8 @@ import com.terremark.exception.TerremarkException;
 abstract class AbstractAPIImpl {
     /** Logger */
     private static final Logger LOG = LoggerFactory.getLogger("com.terremark");
+    /** HTML content-type */
+    private static final String HTML_CONTENT_TYPE = "text/html";
     /** Rest client instance */
     private final RestClient client;
     /** Client configuration */
@@ -412,8 +414,14 @@ abstract class AbstractAPIImpl {
         TerremarkError error = null;
 
         if (ex.getResponse() != null) {
+            String contentType = ex.getResponse().getHeaders().getFirst(HttpHeaders.CONTENT_TYPE);
+
             try {
-                error = ex.getResponse().getEntity(TerremarkError.class);
+                if (HTML_CONTENT_TYPE.equals(contentType)) {
+                    LOG.error("Got {} error from Terremark with text/html response", Integer.valueOf(ex.getResponse().getStatusCode()));
+                } else {
+                    error = ex.getResponse().getEntity(TerremarkError.class);
+                }
             } catch (Exception ignore) {
                 // We don't want this to mask the root cause
                 LOG.error("Terremark Java API error. Please report this to the developers. Exception retrieving Terremark error. "

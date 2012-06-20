@@ -37,6 +37,8 @@ public class CustomHeadersHandler implements ClientHandler {
     private static final String USER_AGENT = "Terremark Java API " + (VERSION == null ? "Dev" : VERSION);
     /** Terremark version header */
     private static final String TERREMARK_VERSION_HEADER = "x-tmrk-version";
+    /** Terremark nonce header */
+    private static final String TERREMARK_NONCE_HEADER = "x-tmrk-nonce";
     /** API version and current date/time provider */
     private final VersionAndDateProvider versionAndDateProvider;
 
@@ -64,7 +66,14 @@ public class CustomHeadersHandler implements ClientHandler {
         final String version = versionAndDateProvider.getVersion();
         final String date = versionAndDateProvider.getDate();
 
+        // Set the user-agent. Ideally this should be configurable to reduce unnecessary traffic
         request.getHeaders().putSingle(HttpHeaders.USER_AGENT, USER_AGENT);
+
+        // If two requests for same resource come in at the same time, one of them will get rejected as replay attack
+        // So we are using a custom Terremark header to add some random nonce. This is not a part of the API spec
+        // Currently nonce is the current time in millis. We can also use some random garbage
+        request.getHeaders().putSingle(TERREMARK_NONCE_HEADER, Long.toString(System.currentTimeMillis()));
+
         if (version != null) {
             request.getHeaders().putSingle(TERREMARK_VERSION_HEADER, version);
         }

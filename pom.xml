@@ -21,6 +21,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <targetJdk>1.6</targetJdk>
+
+        <github.global.server>github</github.global.server>
     </properties>
 
     <organization>
@@ -49,9 +51,6 @@
                 <role>developer</role>
             </roles>
             <timezone>-5</timezone>
-            <properties>
-                <picUrl>http://www.gravatar.com/avatar/ef572164d9bcdafa978c795b20a71108.png</picUrl>
-            </properties>
         </developer>
     </developers>
 
@@ -281,6 +280,22 @@
                         <goals>
                             <goal>jar</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.6</version>
+                <configuration>
+                    <message>Creating site for ${project.version}</message>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>site</phase>
                     </execution>
                 </executions>
             </plugin>

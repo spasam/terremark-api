@@ -23,6 +23,5 @@
  * @author <a href="mailto:spasam@terremark.com">Seshu Pasam</a>
  * @since 1.0
  * @see com.terremark.handlers
- * @see com.terremark.jaxrs
  */
 package com.terremark.impl;

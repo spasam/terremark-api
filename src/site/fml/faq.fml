@@ -1,46 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faqs xmlns="http://maven.apache.org/FML/1.0.1"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/FML/1.0.1 http://maven.apache.org/xsd/fml-1.0.1.xsd"
-  title="Frequently Asked Questions"
-  toplink="false">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/FML/1.0.1 http://maven.apache.org/xsd/fml-1.0.1.xsd"
+    title="Frequently Asked Questions"
+    toplink="false">
 
-  <part id="general">
-    <title>General</title>
+    <part id="general">
+        <title>General</title>
 
-    <faq id="whats-foo">
-      <question>
-        What is Foo?
-      </question>
-      <answer>
-        <p>some markup goes here</p>
+        <faq id="license">
+            <question>
+                What is the license for Terremark Cloud API?
+            </question>
+            <answer>
+                <p>Terremark Cloud API is released under Apache License 2.0</p>
+            </answer>
+        </faq>
 
-        <source>some source code</source>
+        <faq id="express">
+            <question>
+                Does this support Terremark vCloud Express?
+            </question>
+            <answer>
+                <p>No. Currently only Terremark Enterprise Cloud is supported</p>
+            </answer>
+        </faq>
 
-        <p>some markup goes here</p>
-      </answer>
-    </faq>
+        <faq id="contribution">
+            <question>
+                Can I contribute back?
+            </question>
+            <answer>
+                <p>Sure. Follow the github fork/pull process. See {{https://help.github.com/articles/fork-a-repo}}</p>
+            </answer>
+        </faq>
 
-    <faq id="whats-bar">
-      <question>
-        What is Bar?
-      </question>
-      <answer>
-        <p>some markup goes here</p>
-      </answer>
-    </faq>
-  </part>
+        <faq id="issues">
+            <question>
+                How can I report bug/improvements?
+            </question>
+            <answer>
+                <p>Bugs/improvements can be reported at {{https://github.com/spasam/terremark-api/issues}}</p>
+            </answer>
+        </faq>
 
-  <part id="install">
-    <title>Installation</title>
-
-    <faq id="how-install">
-      <question>
-        How do I install Foo?
-      </question>
-      <answer>
-        <p>some markup goes here</p>
-      </answer>
-    </faq>
-  </part>
+        <faq id="groups">
+            <question>
+                Where are the mailing lists?
+            </question>
+            <answer>
+                <p>Developer mailing list: {{https://groups.google.com/forum/#!forum/terremark-api-dev}}</p><br>
+                <p>User mailing list: {{https://groups.google.com/forum/#!forum/terremark-api-users}}</p>
+            </answer>
+        </faq>
+    </part>
 </faqs>

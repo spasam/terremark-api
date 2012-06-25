@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faqs xmlns="http://maven.apache.org/FML/1.0.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/FML/1.0.1 http://maven.apache.org/xsd/fml-1.0.1.xsd"
+    title="Organization/Environment/Compute Pool examples"
+    toplink="false">
+
+    <part id="org">
+        <title>Organization, Environment, Compute Pool examples</title>
+
+        <faq id="get-orgs">
+            <question>
+                How do I retrieve <code>Organization</code>?
+            </question>
+            <answer>
+                <source>
+                    final Organizations orgs = client.getOrganizationHandler().getOrganizations();
+                    final Organization org = orgs.getOrganizations().get(0);    // First organization
+                    final String organizationId == TerremarkFactory.getId(org); // First organization ID
+                </source>
+            </answer>
+        </faq>
+
+        <faq id="get-envs">
+            <question>
+                How can I get <code>Environments</code> in an <code>Organization</code>?
+            </question>
+            <answer>
+                <source>
+                    final Environments envs = client.getOrganizationHandler().getEnvironments(organizationId);
+                    final Environment env = envs.getEnvironments().get(0);      // First environment
+                    final String environmentId = TerremarkFactory.getId(env);   // First environment ID
+                </source>
+            </answer>
+        </faq>
+
+        <faq id="get-pools">
+            <question>
+                How can I get <code>Compute Pools</code> in an <code>Environment</code>?
+            </question>
+            <answer>
+                <source>
+                    final ComputePools pools = client.getEnvironmentHandler().getComputePools(environmentId);
+                    final ComputePool pool = pools.getComputePools().get(0);    // First compute pool
+                    final String poolID = TerremarkFactory.getId(pool);         // First compute pool ID
+                </source>
+            </answer>
+        </faq>
+
+        <faq id="create-key">
+            <question>
+                How can I create a SSH key?
+            </question>
+            <answer>
+                <source>
+                    final CreateSshKey createSshKey = new CreateSshKey();
+                    createSshKey.setDefault(Boolean.FALSE);
+                    createSshKey.setName(keyName);
+
+                    final SshKey sshKey = client.getOrganizationHandler().sshKeyCreate(organizationId, createSshKey);
+                    final String sshKeyId = TerremarkFactory.getId(sshKey);           // SSH key ID
+
+                    // Save the private key
+                    final OutputStream os = new FileOutputStream(keyName + ".pem");   // Specify absolute path
+                    try {
+                        os.write(sshKey.getPrivateKey().getBytes());
+                    } finally {
+                        os.close();
+                    }
+                </source>
+            </answer>
+        </faq>
+
+        <faq id="delete-key">
+            <question>
+                How can I delete a SSH key?
+            </question>
+            <answer>
+                <source>
+                    client.getOrganizationHandler().sshKeysRemove(sshKeyId);
+                </source>
+            </answer>
+        </faq>
+
+        <faq id="get-networks">
+            <question>
+                How do I get <code>Networks</code> in an <code>Environment</code>?
+            </question>
+            <answer>
+                <source>
+                    final Networks networks = client.getNetworkHandler().getNetworks(environmentId);
+                </source>
+            </answer>
+        </faq>
+
+        <faq id="get-free-ip">
+            <question>
+                How do I get a free IP address from a network?
+            </question>
+            <answer>
+                <source>
+                    final Network nnetwork = client.getNetworkHandler().getNetworkByID(networkId);
+                    for (IpAddress ipaddr : n.getIpAddresses().getIpAddresses()) {
+                        if (ipaddr.getHost() == null &amp;&amp; !ipaddr.isReserved().booleanValue()) {
+                            return ipaddr;
+                        }
+                    }
+                </source>
+            </answer>
+        </faq>
+    </part>
+</faqs>

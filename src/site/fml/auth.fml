@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faqs xmlns="http://maven.apache.org/FML/1.0.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/FML/1.0.1 http://maven.apache.org/xsd/fml-1.0.1.xsd"
+    title="Authentication examples"
+    toplink="false">
+
+    <part id="auth">
+        <title>Authentication examples</title>
+
+        <faq id="basic">
+            <question>
+                How do I perform basic authentication?
+            </question>
+            <answer>
+                <p>NOTE: Basic authentication is not preferred authentication method</p>
+                <p>You can create Terremark client instance using the following code:</p>
+                <source>
+    final PropertiesBuilder props = new PropertiesBuilder().setUserName(user).setPassword(password).setHttpClient(new DefaultHttpClient());
+    final TerremarkClient client = TerremarkFactory.getClient(props);
+                </source>
+            </answer>
+        </faq>
+
+        <faq id="signing">
+            <question>
+                How do I perform Cloud API authentication?
+            </question>
+            <answer>
+                <p>NOTE: Cloud API authentication is the preferred authentication method</p>
+                <p>You can create Terremark client instance using the following code:</p>
+                <source>
+    final PropertiesBuilder props = new PropertiesBuilder().setAccessKey(accessKey).setPrivateKey(privateKey).setHttpClient(new DefaultHttpClient());
+    final TerremarkClient client = TerremarkFactory.getClient(props);
+                </source>
+            </answer>
+        </faq>
+    </part>
+</faqs>

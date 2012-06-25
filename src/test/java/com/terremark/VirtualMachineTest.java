@@ -64,6 +64,7 @@ import com.terremark.api.Templates;
 import com.terremark.api.VirtualDisk;
 import com.terremark.api.VirtualDiskBase;
 import com.terremark.api.VirtualMachine;
+import com.terremark.exception.RequestFailedException;
 import com.terremark.exception.TerremarkException;
 
 /**
@@ -227,6 +228,10 @@ public class VirtualMachineTest extends AbstractCloudApiAuthTestBase {
     @Order(4)
     @Test
     public void testPowerOn() throws Exception {
+        if (LIVESPEC) {
+            virtualMachineId = "4";
+        }
+
         Task task = client.getComputePoolHandler().virtualMachinePowerOn(virtualMachineId);
         waitForTask(task);
 
@@ -243,6 +248,10 @@ public class VirtualMachineTest extends AbstractCloudApiAuthTestBase {
     @Order(5)
     @Test
     public void testAddDisk() throws Exception {
+        if (LIVESPEC) {
+            virtualMachineId = "1";
+        }
+
         VirtualMachine vm = client.getComputePoolHandler().getVirtualMachineByID(virtualMachineId);
         assertResource(vm);
 
@@ -254,7 +263,7 @@ public class VirtualMachineTest extends AbstractCloudApiAuthTestBase {
 
         ResourceCapacity capacity = new ResourceCapacity();
         capacity.setUnit("GB"); // Must be GB
-        capacity.setValue(new BigDecimal(1));
+        capacity.setValue(new BigDecimal(LIVESPEC ? 25 : 1));
 
         VirtualDisk disk1 = new VirtualDisk();
         disk1.setName("Disk 1 " + TEST_ID); // Ignored
@@ -281,6 +290,10 @@ public class VirtualMachineTest extends AbstractCloudApiAuthTestBase {
     @Order(6)
     @Test
     public void testShutdown() throws Exception {
+        if (LIVESPEC) {
+            virtualMachineId = "1";
+        }
+
         Task task = client.getComputePoolHandler().virtualMachineShutdown(virtualMachineId);
         waitForTask(task);
 
@@ -321,20 +334,22 @@ public class VirtualMachineTest extends AbstractCloudApiAuthTestBase {
         // Wait for the detach disk task to finish
         waitForTask(detachedDisk.getTasks().getTasks().get(0));
 
-        // Detach the last but one
-        disk.setIndex(disks.get(disks.size() - 2).getIndex());
+        if (!LIVESPEC) {
+            // Detach the last but one
+            disk.setIndex(disks.get(disks.size() - 2).getIndex());
 
-        detachDisk.setName("D2" + TEST_ID);
-        detachDisk.setDisk(disk);
+            detachDisk.setName("D2" + TEST_ID);
+            detachDisk.setDisk(disk);
 
-        detachedDisk = client.getComputePoolHandler().virtualMachineDetachDisk(virtualMachineId, detachDisk);
-        assertResource(detachedDisk);
-        assertNotNull("Invalid detached disk tasks: " + detachedDisk, detachedDisk.getTasks());
-        assertTrue("Invalid detached disk tasks: " + detachedDisk, detachedDisk.getTasks().getTasks().size() == 1);
-        detachedDiskId2 = TerremarkFactory.getId(detachedDisk);
+            detachedDisk = client.getComputePoolHandler().virtualMachineDetachDisk(virtualMachineId, detachDisk);
+            assertResource(detachedDisk);
+            assertNotNull("Invalid detached disk tasks: " + detachedDisk, detachedDisk.getTasks());
+            assertTrue("Invalid detached disk tasks: " + detachedDisk, detachedDisk.getTasks().getTasks().size() == 1);
+            detachedDiskId2 = TerremarkFactory.getId(detachedDisk);
 
-        // Wait for the detach disk task to finish
-        waitForTask(detachedDisk.getTasks().getTasks().get(0));
+            // Wait for the detach disk task to finish
+            waitForTask(detachedDisk.getTasks().getTasks().get(0));
+        }
     }
 
     /**
@@ -420,7 +435,11 @@ public class VirtualMachineTest extends AbstractCloudApiAuthTestBase {
             // monitors. So create a default monitor on all Internet services that are on the same port. Add the node
             // service and add back the loopback monitors
             for (String serviceId : internetServices) {
-                client.getNetworkHandler().monitorCreateDefault(serviceId);
+                try {
+                    client.getNetworkHandler().monitorCreateDefault(serviceId);
+                } catch (RequestFailedException ex) {
+                    // Livespec env says: "Intenet service monitor already exists"
+                }
             }
 
             // Create node service
@@ -459,9 +478,11 @@ public class VirtualMachineTest extends AbstractCloudApiAuthTestBase {
         }
 
         // Delete Internet services
-        for (String serviceId : internetServices) {
-            task = client.getNetworkHandler().internetServiceRemove(serviceId);
-            waitForTask(task);
+        if (!LIVESPEC) {
+            for (String serviceId : internetServices) {
+                task = client.getNetworkHandler().internetServiceRemove(serviceId);
+                waitForTask(task);
+            }
         }
     }
 
@@ -473,6 +494,11 @@ public class VirtualMachineTest extends AbstractCloudApiAuthTestBase {
     @Order(10)
     @Test
     public void testDelete() throws Exception {
+        if (LIVESPEC) {
+            detachedDiskId2 = "1";
+            virtualMachineId = "2";
+        }
+
         Task task = client.getComputePoolHandler().detachedDiskRemove(detachedDiskId2);
         waitForTask(task);
 

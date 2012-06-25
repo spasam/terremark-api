@@ -417,7 +417,7 @@ abstract class AbstractAPIImpl {
             String contentType = ex.getResponse().getHeaders().getFirst(HttpHeaders.CONTENT_TYPE);
 
             try {
-                if (HTML_CONTENT_TYPE.equals(contentType)) {
+                if (contentType != null && contentType.startsWith(HTML_CONTENT_TYPE)) {
                     LOG.error("Got {} error from Terremark with text/html response", Integer.valueOf(ex.getResponse().getStatusCode()));
                 } else {
                     error = ex.getResponse().getEntity(TerremarkError.class);

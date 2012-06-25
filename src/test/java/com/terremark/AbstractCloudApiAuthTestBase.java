@@ -16,6 +16,8 @@
 package com.terremark;
 
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.SchemeRegistryFactory;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.junit.BeforeClass;
 
 import com.terremark.config.PropertiesBuilder;
@@ -33,9 +35,14 @@ public abstract class AbstractCloudApiAuthTestBase extends AbstractTestBase {
      */
     @BeforeClass
     public static void cloudApiAuth() throws Exception {
+        ThreadSafeClientConnManager httpConnectionManager = new ThreadSafeClientConnManager(
+                        SchemeRegistryFactory.createDefault());
+        httpConnectionManager.setMaxTotal(10);
+        httpConnectionManager.setDefaultMaxPerRoute(10);
+
         final PropertiesBuilder props = new PropertiesBuilder().setEndPoint(ENDPOINT_URL).setAccessKey(ACCESS_KEY)
                         .setAPIVersion(VERSION).setContentType(CONTENT_TYPE).setPrivateKey(PRIVATE_KEY)
-                        .setHttpClient(new DefaultHttpClient());
+                        .setHttpClient(new DefaultHttpClient(httpConnectionManager));
         client = TerremarkFactory.getClient(props);
     }
 }

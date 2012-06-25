@@ -54,8 +54,9 @@ public class AuthenticationTest extends AbstractTestBase {
     @Order(2)
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidUri() throws Exception {
-        new PropertiesBuilder().setAccessKey(ACCESS_KEY).setAPIVersion(VERSION).setContentType(CONTENT_TYPE)
-                        .setPrivateKey(PRIVATE_KEY).setHttpClient(new DefaultHttpClient()).build();
+        new PropertiesBuilder().setEndPoint(null).setAccessKey(ACCESS_KEY).setAPIVersion(VERSION)
+                        .setContentType(CONTENT_TYPE).setPrivateKey(PRIVATE_KEY).setHttpClient(new DefaultHttpClient())
+                        .build();
     }
 
     /**

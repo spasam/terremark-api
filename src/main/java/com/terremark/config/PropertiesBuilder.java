@@ -32,6 +32,8 @@ import com.terremark.impl.ClientConfiguration;
  * @see com.terremark.TerremarkFactory#getClient(PropertiesBuilder)
  */
 public class PropertiesBuilder {
+    /** Default Terremark eCloud API end point URL */
+    public static final String ENDPOINT_URL = "https://services.enterprisecloud.terremark.com/cloudapi/ecloud";
     /** API end point URL */
     private String uri;
     /** User name for basic authentication */
@@ -59,9 +61,11 @@ public class PropertiesBuilder {
 
     /**
      * Default constructor. Sets the context type to {@link ContentType#XML}, signature algorithm to
-     * {@link SignatureAlgorithm#HMAC_SHA256} and API version to {@link Version#VERSION_2_12}.
+     * {@link SignatureAlgorithm#HMAC_SHA256} and API version to {@link Version#VERSION_2_12}. API end point URL is set
+     * to the default value (https://services.enterprisecloud.terremark.com/cloudapi/ecloud).
      */
     public PropertiesBuilder() {
+        this.uri = ENDPOINT_URL;
         this.contentType = ContentType.XML;
         this.signatureAlgorithm = SignatureAlgorithm.HMAC_SHA256;
         this.version = Version.VERSION_2_12;
@@ -111,6 +115,10 @@ public class PropertiesBuilder {
      * @return The builder object reference.
      */
     public final PropertiesBuilder setEndPoint(final String uri) {
+        if (StringUtils.isEmpty(uri)) {
+            throw new IllegalArgumentException("Invalid endpoint URI");
+        }
+
         URI.create(uri); // Validate
         this.uri = uri;
         return this;

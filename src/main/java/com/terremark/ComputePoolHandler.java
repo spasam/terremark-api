@@ -1137,11 +1137,10 @@ public interface ComputePoolHandler {
      * <p/>
      * {@code CatalogEntry}, is required, to identify the catalog item to import when creating the virtual machine.
      * <p/>
-     * {@code NetworkMappings}, {@code NetworkMapping}, and {@code Network} are required. The {@code name} is required
-     * on {@code NetworkMapping} and must match the {@code Name} of one {@code NetworkMapping} in the
-     * {@code NetworkAdapters} of the catalog configuration in the response to
-     * {@link OrganizationHandler#getCatalogConfiguration(String)}. {@code Network} will be used identify the network to
-     * which to assign the virtual machine when created.
+     * {@code NetworkMapping}, and {@code Network} are required. The {@code name} is required on {@code NetworkMapping}
+     * and must match the {@code Name} of one {@code NetworkMapping} in the {@code NetworkAdapters} of the catalog
+     * configuration in the response to {@link OrganizationHandler#getCatalogConfiguration(String)}. {@code Network}
+     * will be used identify the network to which to assign the virtual machine when created.
      * <p/>
      * {@code OperatingSystem} is optional and provides an override for a catalog item with an operating system
      * unsupported in the target location.

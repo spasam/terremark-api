@@ -60,14 +60,14 @@ public class AbstractTestBase {
 
     /** TODO */
     private static final String[] REAL_ENV_CONFIG = new String[] {
-                    "https://services.enterprisecloud.terremark.com/cloudapi/ecloud",
-                    "user@email.com",
-                    "password",
-                    "access key",
-                    "private key"};
+                    "https://services-beta.enterprisecloud.terremark.com/cloudapi/ecloud",
+                    "tmark.enterprise@cloudswitch.com",
+                    "DQgfYsSAvEkbHG2",
+                    "f2e736bb9daa4be287ff2b1c407c2367",
+                    "A747EB1561E54CD66AE81D91207F7C0B0B81FE2AA0C60FDB31594F1424278505B1AECBE653C3889173FAC08F94020126CFE4E9520803DF330AC8720E727D60E6"};
 
     /** Whether to use Livespec environment or Beta environment */
-    protected static final boolean LIVESPEC = false;
+    protected static final boolean LIVESPEC = true;
 
     /** API endpoint URL */
     protected static final String ENDPOINT_URL = LIVESPEC ? LIVESPEC_CONFIG[0] : REAL_ENV_CONFIG[0];
@@ -202,6 +202,7 @@ public class AbstractTestBase {
      * TODO
      *
      * @param keyName
+     * @return
      * @throws Exception
      */
     protected Reference createSshKey(final String keyName) throws Exception {
@@ -238,11 +239,13 @@ public class AbstractTestBase {
      * @throws Exception
      */
     protected void deleteSshKey() throws Exception {
-        assertNotNull("Invalid SSH key ID", sshKeyId);
-        client.getOrganizationHandler().sshKeysRemove(sshKeyId);
+        if (!LIVESPEC) {
+            assertNotNull("Invalid SSH key ID", sshKeyId);
+            client.getOrganizationHandler().sshKeysRemove(sshKeyId);
 
-        assertNotNull("Invalid SSH key name", sshKeyName);
-        Runtime.getRuntime().exec("/bin/rm -rf " + System.getProperty("java.io.tmpdir") + "/" + sshKeyName + ".pem");
+            assertNotNull("Invalid SSH key name", sshKeyName);
+            Runtime.getRuntime().exec("/bin/rm -rf " + System.getProperty("java.io.tmpdir") + "/" + sshKeyName + ".pem");
+        }
     }
 
     /**
@@ -307,24 +310,26 @@ public class AbstractTestBase {
         String taskId = TerremarkFactory.getId(task);
         Task t = task;
 
-        while (t.getStatus() != TaskStatus.COMPLETE) {
-            try {
-                Thread.sleep(5000L);
-            } catch (InterruptedException ex) {
-                // Ignore
-            }
+        if (!LIVESPEC) {
+            while (t.getStatus() != TaskStatus.COMPLETE) {
+                try {
+                    Thread.sleep(5000L);
+                } catch (InterruptedException ex) {
+                    // Ignore
+                }
 
-            t = client.getEnvironmentHandler().getTaskByID(taskId);
-            assertResourceNoName(t);
+                t = client.getEnvironmentHandler().getTaskByID(taskId);
+                assertResourceNoName(t);
 
-            switch (t.getStatus()) {
-            case COMPLETE:
-                return;
-            case ERROR:
-                throw new Exception("Task failed with error: " + t);
-            case QUEUED:
-            case RUNNING:
-                // Continue
+                switch (t.getStatus()) {
+                case COMPLETE:
+                    return;
+                case ERROR:
+                    throw new Exception("Task failed with error: " + t);
+                case QUEUED:
+                case RUNNING:
+                    // Continue
+                }
             }
         }
     }
@@ -348,6 +353,12 @@ public class AbstractTestBase {
 
             vm = client.getComputePoolHandler().getVirtualMachineByID(vmId);
             assertResource(vm);
+
+            if (LIVESPEC) {
+                if (vm.getTasks().getTotalCount() < 1 || vm.getTasks().getTasks().get(0).getStatus() == TaskStatus.COMPLETE) {
+                    return;
+                }
+            }
 
             switch (vm.getToolsStatus()) {
             case CURRENT:
@@ -379,6 +390,12 @@ public class AbstractTestBase {
 
             vm = client.getComputePoolHandler().getVirtualMachineByID(vmId);
             assertResource(vm);
+
+            if (LIVESPEC) {
+                if (vm.getTasks().getTotalCount() < 1 || vm.getTasks().getTasks().get(0).getStatus() == TaskStatus.COMPLETE) {
+                    return;
+                }
+            }
 
             if (!vm.isPoweredOn().booleanValue()) {
                 return;

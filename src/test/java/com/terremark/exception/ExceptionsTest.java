@@ -127,8 +127,6 @@ public class ExceptionsTest extends AbstractTestBase {
 
     /**
      * TODO
-     * <p/>
-     * NOTE: This test will fail in Livespec testing because we can always activate a public IP address.
      *
      * @throws Exception
      */
@@ -142,7 +140,11 @@ public class ExceptionsTest extends AbstractTestBase {
 
         getEnvironmentId();
 
+        // NOTE: This call will not fail in Livespec testing because we can always activate a public IP address
         client.getNetworkHandler().publicIPActivate(environmentId);
+
+        // This should fail in Livespec environment
+        client.getComputePoolHandler().enableMemoryBurst("1");
     }
 
     /**

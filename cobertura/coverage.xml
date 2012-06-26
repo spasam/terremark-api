@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.29062659195109525" branch-rate="0.2361111111111111" lines-covered="1141" lines-valid="3926" branches-covered="170" branches-valid="720" complexity="1.2646493756003843" version="1.9.4.1" timestamp="1340678315218">
+<coverage line-rate="0.29062659195109525" branch-rate="0.2361111111111111" lines-covered="1141" lines-valid="3926" branches-covered="170" branches-valid="720" complexity="1.2646493756003843" version="1.9.4.1" timestamp="1340680658614">
 	<sources>
 		<source>/home/seshu/terremark-api/src/main/java</source>
 		<source>--source</source>
@@ -18032,13 +18032,13 @@
 						</method>
 						<method name="read" signature="()I" line-rate="1.0" branch-rate="0.6666666666666666">
 							<lines>
-								<line number="204" hits="362749" branch="false"/>
-								<line number="206" hits="362749" branch="true" condition-coverage="50% (1/2)">
+								<line number="204" hits="362751" branch="false"/>
+								<line number="206" hits="362751" branch="true" condition-coverage="50% (1/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="50%"/>
 									</conditions>
 								</line>
-								<line number="207" hits="362749" branch="true" condition-coverage="66% (4/6)">
+								<line number="207" hits="362751" branch="true" condition-coverage="66% (4/6)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 										<condition number="1" type="jump" coverage="50%"/>
@@ -18052,13 +18052,13 @@
 								</line>
 								<line number="209" hits="113" branch="false"/>
 								<line number="210" hits="113" branch="false"/>
-								<line number="212" hits="362526" branch="true" condition-coverage="50% (1/2)">
+								<line number="212" hits="362528" branch="true" condition-coverage="50% (1/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="50%"/>
 									</conditions>
 								</line>
-								<line number="213" hits="362526" branch="false"/>
-								<line number="217" hits="362749" branch="false"/>
+								<line number="213" hits="362528" branch="false"/>
+								<line number="217" hits="362751" branch="false"/>
 							</lines>
 						</method>
 					</methods>
@@ -18076,13 +18076,13 @@
 						<line number="190" hits="0" branch="false"/>
 						<line number="193" hits="110" branch="false"/>
 						<line number="194" hits="110" branch="false"/>
-						<line number="204" hits="362749" branch="false"/>
-						<line number="206" hits="362749" branch="true" condition-coverage="50% (1/2)">
+						<line number="204" hits="362751" branch="false"/>
+						<line number="206" hits="362751" branch="true" condition-coverage="50% (1/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="50%"/>
 							</conditions>
 						</line>
-						<line number="207" hits="362749" branch="true" condition-coverage="66% (4/6)">
+						<line number="207" hits="362751" branch="true" condition-coverage="66% (4/6)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 								<condition number="1" type="jump" coverage="50%"/>
@@ -18096,13 +18096,13 @@
 						</line>
 						<line number="209" hits="113" branch="false"/>
 						<line number="210" hits="113" branch="false"/>
-						<line number="212" hits="362526" branch="true" condition-coverage="50% (1/2)">
+						<line number="212" hits="362528" branch="true" condition-coverage="50% (1/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="50%"/>
 							</conditions>
 						</line>
-						<line number="213" hits="362526" branch="false"/>
-						<line number="217" hits="362749" branch="false"/>
+						<line number="213" hits="362528" branch="false"/>
+						<line number="217" hits="362751" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.terremark.handlers.HTTPLoggingHandler$LoggingOutputStream" filename="com/terremark/handlers/HTTPLoggingHandler.java" line-rate="0.8125" branch-rate="0.4166666666666667" complexity="3.2222222222222223">

@@ -107,67 +107,67 @@
                 How do I retrieve <tt>Organization</tt>?
             </a></dt><dd>
                 <div class="source"><pre>
-                    final Organizations orgs = client.getOrganizationHandler().getOrganizations();
-                    final Organization org = orgs.getOrganizations().get(0);    // First organization
-                    final String organizationId == TerremarkFactory.getId(org); // First organization ID
+final Organizations orgs = client.getOrganizationHandler().getOrganizations();
+final Organization org = orgs.getOrganizations().get(0);    // First organization
+final String organizationId == TerremarkFactory.getId(org); // First organization ID
                </pre></div>
             <hr /></dd><dt><a name="get-envs">
                 How can I get <tt>Environments</tt> in an <tt>Organization</tt>?
             </a></dt><dd>
                 <div class="source"><pre>
-                    final Environments envs = client.getOrganizationHandler().getEnvironments(organizationId);
-                    final Environment env = envs.getEnvironments().get(0);      // First environment
-                    final String environmentId = TerremarkFactory.getId(env);   // First environment ID
+final Environments envs = client.getOrganizationHandler().getEnvironments(organizationId);
+final Environment env = envs.getEnvironments().get(0);      // First environment
+final String environmentId = TerremarkFactory.getId(env);   // First environment ID
                </pre></div>
             <hr /></dd><dt><a name="get-pools">
                 How can I get <tt>Compute Pools</tt> in an <tt>Environment</tt>?
             </a></dt><dd>
                 <div class="source"><pre>
-                    final ComputePools pools = client.getEnvironmentHandler().getComputePools(environmentId);
-                    final ComputePool pool = pools.getComputePools().get(0);    // First compute pool
-                    final String poolID = TerremarkFactory.getId(pool);         // First compute pool ID
+final ComputePools pools = client.getEnvironmentHandler().getComputePools(environmentId);
+final ComputePool pool = pools.getComputePools().get(0);    // First compute pool
+final String poolID = TerremarkFactory.getId(pool);         // First compute pool ID
                </pre></div>
             <hr /></dd><dt><a name="create-key">
                 How can I create a SSH key?
             </a></dt><dd>
                 <div class="source"><pre>
-                    final CreateSshKey createSshKey = new CreateSshKey();
-                    createSshKey.setDefault(Boolean.FALSE);
-                    createSshKey.setName(keyName);
+final CreateSshKey createSshKey = new CreateSshKey();
+createSshKey.setDefault(Boolean.FALSE);
+createSshKey.setName(keyName);
 
-                    final SshKey sshKey = client.getOrganizationHandler().sshKeyCreate(organizationId, createSshKey);
-                    final String sshKeyId = TerremarkFactory.getId(sshKey);           // SSH key ID
+final SshKey sshKey = client.getOrganizationHandler().sshKeyCreate(organizationId, createSshKey);
+final String sshKeyId = TerremarkFactory.getId(sshKey);           // SSH key ID
 
-                    // Save the private key
-                    final OutputStream os = new FileOutputStream(keyName + &quot;.pem&quot;);   // Specify absolute path
-                    try {
-                        os.write(sshKey.getPrivateKey().getBytes());
-                    } finally {
-                        os.close();
-                    }
+// Save the private key
+final OutputStream os = new FileOutputStream(keyName + &quot;.pem&quot;);   // Specify absolute path
+try {
+    os.write(sshKey.getPrivateKey().getBytes());
+} finally {
+    os.close();
+}
                </pre></div>
             <hr /></dd><dt><a name="delete-key">
                 How can I delete a SSH key?
             </a></dt><dd>
                 <div class="source"><pre>
-                    client.getOrganizationHandler().sshKeysRemove(sshKeyId);
+client.getOrganizationHandler().sshKeysRemove(sshKeyId);
                </pre></div>
             <hr /></dd><dt><a name="get-networks">
                 How do I get <tt>Networks</tt> in an <tt>Environment</tt>?
             </a></dt><dd>
                 <div class="source"><pre>
-                    final Networks networks = client.getNetworkHandler().getNetworks(environmentId);
+final Networks networks = client.getNetworkHandler().getNetworks(environmentId);
                </pre></div>
             <hr /></dd><dt><a name="get-free-ip">
                 How do I get a free IP address from a network?
             </a></dt><dd>
                 <div class="source"><pre>
-                    final Network nnetwork = client.getNetworkHandler().getNetworkByID(networkId);
-                    for (IpAddress ipaddr : n.getIpAddresses().getIpAddresses()) {
-                        if (ipaddr.getHost() == null &amp;&amp; !ipaddr.isReserved().booleanValue()) {
-                            return ipaddr;
-                        }
-                    }
+final Network nnetwork = client.getNetworkHandler().getNetworkByID(networkId);
+for (IpAddress ipaddr : n.getIpAddresses().getIpAddresses()) {
+    if (ipaddr.getHost() == null &amp;&amp; !ipaddr.isReserved().booleanValue()) {
+        return ipaddr;
+    }
+}
                </pre></div>
             </dd></dl></div>
       </div>

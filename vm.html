@@ -97,66 +97,66 @@
                 How do I retrieve templates?
             </a></dt><dd>
                 <div class="source"><pre>
-                    final Templates templates = client.getComputePoolHandler().getTemplates(computePoolId);
-                    Reference centOS64Template = null;
+final Templates templates = client.getComputePoolHandler().getTemplates(computePoolId);
+Reference centOS64Template = null;
 
-                    for (final TemplateFamily family = templates.getFamilies()) {
-                        for (final TemplateCategory category = family.getCategories()) {
-                            for (final TemplateOperatingSystem os : category.getOperatingSystems()) {
-                                for (final Reference template : os.getTemplates()) {
-                                    System.out.println(&quot;Template name: &quot; + template.getName());
+for (final TemplateFamily family = templates.getFamilies()) {
+    for (final TemplateCategory category = family.getCategories()) {
+        for (final TemplateOperatingSystem os : category.getOperatingSystems()) {
+            for (final Reference template : os.getTemplates()) {
+                System.out.println(&quot;Template name: &quot; + template.getName());
 
-                                    if (&quot;CentOS 5.5 x64&quot;.equals(template.getName())) {
-                                        centOS64Template = template;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
+                if (&quot;CentOS 5.5 x64&quot;.equals(template.getName())) {
+                    centOS64Template = template;
+                    break;
+                }
+            }
+        }
+    }
+}
                </pre></div>
             <hr /></dd><dt><a name="create-vm">
                 How do I create a virtual machine?
             </a></dt><dd>
                 <div class="source"><pre>
-                    final NetworkAdapterSetting adapterSetting = new NetworkAdapterSetting();
-                    adapterSetting.setIpAddress(vmIPAddress.getName());
-                    adapterSetting.setNetwork(network);
+final NetworkAdapterSetting adapterSetting = new NetworkAdapterSetting();
+adapterSetting.setIpAddress(vmIPAddress.getName());
+adapterSetting.setNetwork(network);
 
-                    final DnsSettings dnsSettings = new DnsSettings();
-                    dnsSettings.setPrimaryDns(&quot;8.8.8.8&quot;);
-                    dnsSettings.setPrimaryDns(&quot;8.8.4.4&quot;);
+final DnsSettings dnsSettings = new DnsSettings();
+dnsSettings.setPrimaryDns(&quot;8.8.8.8&quot;);
+dnsSettings.setPrimaryDns(&quot;8.8.4.4&quot;);
 
-                    final NetworkSettings networkSettings = new NetworkSettings();
-                    networkSettings.setDnsSettings(dnsSettings);
-                    networkSettings.getNetworkAdapterSettings().add(adapterSetting);
+final NetworkSettings networkSettings = new NetworkSettings();
+networkSettings.setDnsSettings(dnsSettings);
+networkSettings.getNetworkAdapterSettings().add(adapterSetting);
 
-                    final LayoutRequest layoutRequest = new LayoutRequest();
-                    layoutRequest.setNewRow(&quot;My Row&quot;);
-                    layoutRequest.setNewGroup('My Group&quot;);
+final LayoutRequest layoutRequest = new LayoutRequest();
+layoutRequest.setNewRow(&quot;My Row&quot;);
+layoutRequest.setNewGroup('My Group&quot;);
 
-                    final LinuxCustomization customization = new LinuxCustomization();
-                    customization.setNetworkSettings(networkSettings);
-                    customization.setSshKey(sshKey);
+final LinuxCustomization customization = new LinuxCustomization();
+customization.setNetworkSettings(networkSettings);
+customization.setSshKey(sshKey);
 
-                    final ResourceCapacity memory = new ResourceCapacity();
-                    memory.setUnit(&quot;MB&quot;);
-                    memory.setValue(new BigDecimal(1024));  // 1 GB RAM
+final ResourceCapacity memory = new ResourceCapacity();
+memory.setUnit(&quot;MB&quot;);
+memory.setValue(new BigDecimal(1024));  // 1 GB RAM
 
-                    final CreateVirtualMachine createVM = new CreateVirtualMachine();
-                    createVM.setDescription(&quot;Virtual machine description&quot;);
-                    createVM.setLayout(layoutRequest);
-                    createVM.setLinuxCustomization(customization);
-                    createVM.setMemory(memory);
-                    createVM.setName(&quot;My VM&quot;);
-                    createVM.setProcessorCount(1);          // 1 processor
-                    createVM.getTags().add(&quot;My tag&quot;);
-                    createVM.setTemplate(centOS64Template);
-                    createVM.setPoweredOn(Boolean.FALSE);
+final CreateVirtualMachine createVM = new CreateVirtualMachine();
+createVM.setDescription(&quot;Virtual machine description&quot;);
+createVM.setLayout(layoutRequest);
+createVM.setLinuxCustomization(customization);
+createVM.setMemory(memory);
+createVM.setName(&quot;My VM&quot;);
+createVM.setProcessorCount(1);          // 1 processor
+createVM.getTags().add(&quot;My tag&quot;);
+createVM.setTemplate(centOS64Template);
+createVM.setPoweredOn(Boolean.FALSE);
 
-                    final VirtualMachine vm = client.getComputePoolHandler().virtualMachineCreateFromTemplate(computePoolId, createVM);
-                    final String virtualMachineId = TerremarkFactory.getId(vm);
-                    final Task task = vm.getTasks().getTasks().get(0);
+final VirtualMachine vm = client.getComputePoolHandler().virtualMachineCreateFromTemplate(computePoolId, createVM);
+final String virtualMachineId = TerremarkFactory.getId(vm);
+final Task task = vm.getTasks().getTasks().get(0);
                </pre></div>
             </dd></dl></div>
       </div>

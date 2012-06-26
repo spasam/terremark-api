@@ -12,7 +12,7 @@
     <groupId>com.terremark</groupId>
     <artifactId>terremark-api</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <name>Terremark Cloud API</name>
     <description>Terremark Enterprise Cloud Java API</description>

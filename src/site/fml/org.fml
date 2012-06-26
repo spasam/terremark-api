@@ -14,9 +14,9 @@
             </question>
             <answer>
                 <source>
-                    final Organizations orgs = client.getOrganizationHandler().getOrganizations();
-                    final Organization org = orgs.getOrganizations().get(0);    // First organization
-                    final String organizationId == TerremarkFactory.getId(org); // First organization ID
+final Organizations orgs = client.getOrganizationHandler().getOrganizations();
+final Organization org = orgs.getOrganizations().get(0);    // First organization
+final String organizationId == TerremarkFactory.getId(org); // First organization ID
                 </source>
             </answer>
         </faq>
@@ -27,9 +27,9 @@
             </question>
             <answer>
                 <source>
-                    final Environments envs = client.getOrganizationHandler().getEnvironments(organizationId);
-                    final Environment env = envs.getEnvironments().get(0);      // First environment
-                    final String environmentId = TerremarkFactory.getId(env);   // First environment ID
+final Environments envs = client.getOrganizationHandler().getEnvironments(organizationId);
+final Environment env = envs.getEnvironments().get(0);      // First environment
+final String environmentId = TerremarkFactory.getId(env);   // First environment ID
                 </source>
             </answer>
         </faq>
@@ -40,9 +40,9 @@
             </question>
             <answer>
                 <source>
-                    final ComputePools pools = client.getEnvironmentHandler().getComputePools(environmentId);
-                    final ComputePool pool = pools.getComputePools().get(0);    // First compute pool
-                    final String poolID = TerremarkFactory.getId(pool);         // First compute pool ID
+final ComputePools pools = client.getEnvironmentHandler().getComputePools(environmentId);
+final ComputePool pool = pools.getComputePools().get(0);    // First compute pool
+final String poolID = TerremarkFactory.getId(pool);         // First compute pool ID
                 </source>
             </answer>
         </faq>
@@ -53,20 +53,20 @@
             </question>
             <answer>
                 <source>
-                    final CreateSshKey createSshKey = new CreateSshKey();
-                    createSshKey.setDefault(Boolean.FALSE);
-                    createSshKey.setName(keyName);
+final CreateSshKey createSshKey = new CreateSshKey();
+createSshKey.setDefault(Boolean.FALSE);
+createSshKey.setName(keyName);
 
-                    final SshKey sshKey = client.getOrganizationHandler().sshKeyCreate(organizationId, createSshKey);
-                    final String sshKeyId = TerremarkFactory.getId(sshKey);           // SSH key ID
+final SshKey sshKey = client.getOrganizationHandler().sshKeyCreate(organizationId, createSshKey);
+final String sshKeyId = TerremarkFactory.getId(sshKey);           // SSH key ID
 
-                    // Save the private key
-                    final OutputStream os = new FileOutputStream(keyName + ".pem");   // Specify absolute path
-                    try {
-                        os.write(sshKey.getPrivateKey().getBytes());
-                    } finally {
-                        os.close();
-                    }
+// Save the private key
+final OutputStream os = new FileOutputStream(keyName + ".pem");   // Specify absolute path
+try {
+    os.write(sshKey.getPrivateKey().getBytes());
+} finally {
+    os.close();
+}
                 </source>
             </answer>
         </faq>
@@ -77,7 +77,7 @@
             </question>
             <answer>
                 <source>
-                    client.getOrganizationHandler().sshKeysRemove(sshKeyId);
+client.getOrganizationHandler().sshKeysRemove(sshKeyId);
                 </source>
             </answer>
         </faq>
@@ -88,7 +88,7 @@
             </question>
             <answer>
                 <source>
-                    final Networks networks = client.getNetworkHandler().getNetworks(environmentId);
+final Networks networks = client.getNetworkHandler().getNetworks(environmentId);
                 </source>
             </answer>
         </faq>
@@ -99,12 +99,12 @@
             </question>
             <answer>
                 <source>
-                    final Network nnetwork = client.getNetworkHandler().getNetworkByID(networkId);
-                    for (IpAddress ipaddr : n.getIpAddresses().getIpAddresses()) {
-                        if (ipaddr.getHost() == null &amp;&amp; !ipaddr.isReserved().booleanValue()) {
-                            return ipaddr;
-                        }
-                    }
+final Network nnetwork = client.getNetworkHandler().getNetworkByID(networkId);
+for (IpAddress ipaddr : n.getIpAddresses().getIpAddresses()) {
+    if (ipaddr.getHost() == null &amp;&amp; !ipaddr.isReserved().booleanValue()) {
+        return ipaddr;
+    }
+}
                 </source>
             </answer>
         </faq>

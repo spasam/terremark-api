@@ -16,8 +16,8 @@
                 <p>NOTE: Basic authentication is not preferred authentication method</p>
                 <p>You can create Terremark client instance using the following code:</p>
                 <source>
-    final PropertiesBuilder props = new PropertiesBuilder().setUserName(user).setPassword(password).setHttpClient(new DefaultHttpClient());
-    final TerremarkClient client = TerremarkFactory.getClient(props);
+final PropertiesBuilder props = new PropertiesBuilder().setUserName(user).setPassword(password).setHttpClient(new DefaultHttpClient());
+final TerremarkClient client = TerremarkFactory.getClient(props);
                 </source>
             </answer>
         </faq>
@@ -30,8 +30,8 @@
                 <p>NOTE: Cloud API authentication is the preferred authentication method</p>
                 <p>You can create Terremark client instance using the following code:</p>
                 <source>
-    final PropertiesBuilder props = new PropertiesBuilder().setAccessKey(accessKey).setPrivateKey(privateKey).setHttpClient(new DefaultHttpClient());
-    final TerremarkClient client = TerremarkFactory.getClient(props);
+final PropertiesBuilder props = new PropertiesBuilder().setAccessKey(accessKey).setPrivateKey(privateKey).setHttpClient(new DefaultHttpClient());
+final TerremarkClient client = TerremarkFactory.getClient(props);
                 </source>
             </answer>
         </faq>

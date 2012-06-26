@@ -31,7 +31,7 @@
                 Can I contribute back?
             </question>
             <answer>
-                <p>Sure. Follow the github fork/pull process. See {{https://help.github.com/articles/fork-a-repo}}</p>
+                <p>Sure. Follow the github fork/pull process. See <a href="https://help.github.com/articles/fork-a-repo">link</a></p>
             </answer>
         </faq>
 
@@ -40,7 +40,7 @@
                 How can I report bug/improvements?
             </question>
             <answer>
-                <p>Bugs/improvements can be reported at {{https://github.com/spasam/terremark-api/issues}}</p>
+                <p>Bugs/improvements can be reported at <a href="https://github.com/spasam/terremark-api/issues">issues</a></p>
             </answer>
         </faq>
 
@@ -49,8 +49,8 @@
                 Where are the mailing lists?
             </question>
             <answer>
-                <p>Developer mailing list: {{https://groups.google.com/forum/#!forum/terremark-api-dev}}</p><br>
-                <p>User mailing list: {{https://groups.google.com/forum/#!forum/terremark-api-users}}</p>
+                <p><a href="https://groups.google.com/forum/#!forum/terremark-api-dev">Developer mailing list</a></p>
+                <p><a href="https://groups.google.com/forum/#!forum/terremark-api-users">User mailing list</a></p>
             </answer>
         </faq>
     </part>

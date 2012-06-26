@@ -14,23 +14,23 @@
             </question>
             <answer>
                 <source>
-                    final Templates templates = client.getComputePoolHandler().getTemplates(computePoolId);
-                    Reference centOS64Template = null;
+final Templates templates = client.getComputePoolHandler().getTemplates(computePoolId);
+Reference centOS64Template = null;
 
-                    for (final TemplateFamily family = templates.getFamilies()) {
-                        for (final TemplateCategory category = family.getCategories()) {
-                            for (final TemplateOperatingSystem os : category.getOperatingSystems()) {
-                                for (final Reference template : os.getTemplates()) {
-                                    System.out.println("Template name: " + template.getName());
+for (final TemplateFamily family = templates.getFamilies()) {
+    for (final TemplateCategory category = family.getCategories()) {
+        for (final TemplateOperatingSystem os : category.getOperatingSystems()) {
+            for (final Reference template : os.getTemplates()) {
+                System.out.println("Template name: " + template.getName());
 
-                                    if ("CentOS 5.5 x64".equals(template.getName())) {
-                                        centOS64Template = template;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
+                if ("CentOS 5.5 x64".equals(template.getName())) {
+                    centOS64Template = template;
+                    break;
+                }
+            }
+        }
+    }
+}
                 </source>
             </answer>
         </faq>
@@ -41,44 +41,44 @@
             </question>
             <answer>
                 <source>
-                    final NetworkAdapterSetting adapterSetting = new NetworkAdapterSetting();
-                    adapterSetting.setIpAddress(vmIPAddress.getName());
-                    adapterSetting.setNetwork(network);
+final NetworkAdapterSetting adapterSetting = new NetworkAdapterSetting();
+adapterSetting.setIpAddress(vmIPAddress.getName());
+adapterSetting.setNetwork(network);
 
-                    final DnsSettings dnsSettings = new DnsSettings();
-                    dnsSettings.setPrimaryDns("8.8.8.8");
-                    dnsSettings.setPrimaryDns("8.8.4.4");
+final DnsSettings dnsSettings = new DnsSettings();
+dnsSettings.setPrimaryDns("8.8.8.8");
+dnsSettings.setPrimaryDns("8.8.4.4");
 
-                    final NetworkSettings networkSettings = new NetworkSettings();
-                    networkSettings.setDnsSettings(dnsSettings);
-                    networkSettings.getNetworkAdapterSettings().add(adapterSetting);
+final NetworkSettings networkSettings = new NetworkSettings();
+networkSettings.setDnsSettings(dnsSettings);
+networkSettings.getNetworkAdapterSettings().add(adapterSetting);
 
-                    final LayoutRequest layoutRequest = new LayoutRequest();
-                    layoutRequest.setNewRow("My Row");
-                    layoutRequest.setNewGroup('My Group");
+final LayoutRequest layoutRequest = new LayoutRequest();
+layoutRequest.setNewRow("My Row");
+layoutRequest.setNewGroup('My Group");
 
-                    final LinuxCustomization customization = new LinuxCustomization();
-                    customization.setNetworkSettings(networkSettings);
-                    customization.setSshKey(sshKey);
+final LinuxCustomization customization = new LinuxCustomization();
+customization.setNetworkSettings(networkSettings);
+customization.setSshKey(sshKey);
 
-                    final ResourceCapacity memory = new ResourceCapacity();
-                    memory.setUnit("MB");
-                    memory.setValue(new BigDecimal(1024));  // 1 GB RAM
+final ResourceCapacity memory = new ResourceCapacity();
+memory.setUnit("MB");
+memory.setValue(new BigDecimal(1024));  // 1 GB RAM
 
-                    final CreateVirtualMachine createVM = new CreateVirtualMachine();
-                    createVM.setDescription("Virtual machine description");
-                    createVM.setLayout(layoutRequest);
-                    createVM.setLinuxCustomization(customization);
-                    createVM.setMemory(memory);
-                    createVM.setName("My VM");
-                    createVM.setProcessorCount(1);          // 1 processor
-                    createVM.getTags().add("My tag");
-                    createVM.setTemplate(centOS64Template);
-                    createVM.setPoweredOn(Boolean.FALSE);
+final CreateVirtualMachine createVM = new CreateVirtualMachine();
+createVM.setDescription("Virtual machine description");
+createVM.setLayout(layoutRequest);
+createVM.setLinuxCustomization(customization);
+createVM.setMemory(memory);
+createVM.setName("My VM");
+createVM.setProcessorCount(1);          // 1 processor
+createVM.getTags().add("My tag");
+createVM.setTemplate(centOS64Template);
+createVM.setPoweredOn(Boolean.FALSE);
 
-                    final VirtualMachine vm = client.getComputePoolHandler().virtualMachineCreateFromTemplate(computePoolId, createVM);
-                    final String virtualMachineId = TerremarkFactory.getId(vm);
-                    final Task task = vm.getTasks().getTasks().get(0);
+final VirtualMachine vm = client.getComputePoolHandler().virtualMachineCreateFromTemplate(computePoolId, createVM);
+final String virtualMachineId = TerremarkFactory.getId(vm);
+final Task task = vm.getTasks().getTasks().get(0);
                 </source>
             </answer>
         </faq>

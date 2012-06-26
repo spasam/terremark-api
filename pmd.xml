@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="4.3" timestamp="2012-06-25T13:34:08.941">
+<pmd version="4.3" timestamp="2012-06-25T22:39:05.621">
 <suppressedviolation filename="/home/seshu/terremark-api/src/main/java/com/terremark/handlers/BasicAuthenticationHandler.java" suppressiontype="annotation" msg="A method/constructor shouldn't explicitly throw java.lang.Exception" usermsg=""/>
 <suppressedviolation filename="/home/seshu/terremark-api/src/main/java/com/terremark/handlers/BasicAuthenticationHandler.java" suppressiontype="annotation" msg="A method/constructor shouldn't explicitly throw java.lang.Exception" usermsg=""/>
 <suppressedviolation filename="/home/seshu/terremark-api/src/main/java/com/terremark/handlers/CloudApiAuthenticationHandler.java" suppressiontype="annotation" msg="A method/constructor shouldn't explicitly throw java.lang.Exception" usermsg=""/>

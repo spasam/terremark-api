@@ -382,25 +382,25 @@
   <td class="src"><pre class="src">&nbsp;        @Override</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;203</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> <span class="keyword">int</span> read() <span class="keyword">throws</span> IOException {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;204</td>  <td class="nbHitsCovered">&nbsp;362839</td>  <td class="src"><pre class="src">&nbsp;            <span class="keyword">final</span> <span class="keyword">int</span> i = is.read();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;204</td>  <td class="nbHitsCovered">&nbsp;362749</td>  <td class="src"><pre class="src">&nbsp;            <span class="keyword">final</span> <span class="keyword">int</span> i = is.read();</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;205</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;206</td>  <td class="nbHitsUncovered"><a title="Line 206: Conditional coverage 50% (1/2).">&nbsp;362839</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 206: Conditional coverage 50% (1/2).">            <span class="keyword">if</span> (DATA_LOGGER.isDebugEnabled()) {</a></span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;207</td>  <td class="nbHitsUncovered"><a title="Line 207: Conditional coverage 66% (4/6) [each condition: 100%, 50%, 50%].">&nbsp;362839</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 207: Conditional coverage 66% (4/6) [each condition: 100%, 50%, 50%].">                <span class="keyword">if</span> (i == -1 || i == 10 || i == 13) {</a></span></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;206</td>  <td class="nbHitsUncovered"><a title="Line 206: Conditional coverage 50% (1/2).">&nbsp;362749</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 206: Conditional coverage 50% (1/2).">            <span class="keyword">if</span> (DATA_LOGGER.isDebugEnabled()) {</a></span></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;207</td>  <td class="nbHitsUncovered"><a title="Line 207: Conditional coverage 66% (4/6) [each condition: 100%, 50%, 50%].">&nbsp;362749</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 207: Conditional coverage 66% (4/6) [each condition: 100%, 50%, 50%].">                <span class="keyword">if</span> (i == -1 || i == 10 || i == 13) {</a></span></pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;208</td>  <td class="nbHitsCovered"><a title="Line 208: Conditional coverage 100% (2/2).">&nbsp;223</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 208: Conditional coverage 100% (2/2).">                    <span class="keyword">if</span> (builder.length() &gt; 0) {</a></pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;209</td>  <td class="nbHitsCovered">&nbsp;113</td>  <td class="src"><pre class="src">&nbsp;                        DATA_LOGGER.debug(<span class="string">"&lt;&lt; {}"</span>, builder);</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;210</td>  <td class="nbHitsCovered">&nbsp;113</td>  <td class="src"><pre class="src">&nbsp;                        builder = <span class="keyword">new</span> StringBuilder();</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;211</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                    }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;212</td>  <td class="nbHitsUncovered"><a title="Line 212: Conditional coverage 50% (1/2).">&nbsp;362616</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 212: Conditional coverage 50% (1/2).">                } <span class="keyword">else</span> <span class="keyword">if</span> (i &gt; 0) {</a></span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;213</td>  <td class="nbHitsCovered">&nbsp;362616</td>  <td class="src"><pre class="src">&nbsp;                    builder.append((<span class="keyword">char</span>) i);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;212</td>  <td class="nbHitsUncovered"><a title="Line 212: Conditional coverage 50% (1/2).">&nbsp;362526</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 212: Conditional coverage 50% (1/2).">                } <span class="keyword">else</span> <span class="keyword">if</span> (i &gt; 0) {</a></span></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;213</td>  <td class="nbHitsCovered">&nbsp;362526</td>  <td class="src"><pre class="src">&nbsp;                    builder.append((<span class="keyword">char</span>) i);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;214</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;215</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;            }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;216</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;217</td>  <td class="nbHitsCovered">&nbsp;362839</td>  <td class="src"><pre class="src">&nbsp;            <span class="keyword">return</span> i;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;217</td>  <td class="nbHitsCovered">&nbsp;362749</td>  <td class="src"><pre class="src">&nbsp;            <span class="keyword">return</span> i;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;218</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;219</td>  <td class="nbHits">&nbsp;</td>
@@ -409,6 +409,6 @@
   <td class="src"><pre class="src">&nbsp;}</pre></td></tr>
 </table>
 
-<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 1.9.4.1 on 6/25/12 1:34 PM.</div>
+<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 1.9.4.1 on 6/25/12 10:38 PM.</div>
 </body>
 </html>

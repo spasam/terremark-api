@@ -37,7 +37,7 @@ public class TerremarkException extends Exception {
      * @param cause Root cause.
      */
     public TerremarkException(final TerremarkError error, final ClientWebException cause) {
-        super(getErrorText(error), cause);
+        super(getErrorText(error, cause), cause);
         this.error = error;
     }
 
@@ -59,6 +59,16 @@ public class TerremarkException extends Exception {
      */
     public TerremarkException(final String message, final Throwable cause) {
         super(message, cause);
+        this.error = null;
+    }
+
+    /**
+     * Constructor that takes root cause.
+     *
+     * @param cause Root cause.
+     */
+    public TerremarkException(final Throwable cause) {
+        super(cause);
         this.error = null;
     }
 
@@ -105,10 +115,15 @@ public class TerremarkException extends Exception {
      * Helper method to create a readable text for a Terremark error.
      *
      * @param error Terremark error.
+     * @param cause Root cause exception.
      * @return Readable text composed of major/minor error codes and error message.
      */
-    private static String getErrorText(final TerremarkError error) {
+    private static String getErrorText(final TerremarkError error, final Throwable cause) {
         if (error == null) {
+            if (cause != null) {
+                return cause.toString();
+            }
+
             return null;
         }
 

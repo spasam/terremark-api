@@ -129,7 +129,7 @@ abstract class AbstractAPIImpl {
         do {
             try {
                 return getResource(relativePath, queryParams, extraHeaders, arguments).get(responseClass);
-            } catch (final ClientWebException ex) {
+            } catch (final Exception ex) {
                 failureCount++;
 
                 try {
@@ -173,7 +173,7 @@ abstract class AbstractAPIImpl {
 
         try {
             return getResource(relativePath, requestEntity, arguments).put(responseClass, requestEntity);
-        } catch (final ClientWebException ex) {
+        } catch (final Exception ex) {
             handleException(ex);
             return null;
         }
@@ -196,7 +196,7 @@ abstract class AbstractAPIImpl {
 
         try {
             return getResource(relativePath, requestEntity, arguments).post(responseClass, requestEntity);
-        } catch (final ClientWebException ex) {
+        } catch (final Exception ex) {
             handleException(ex);
             return null;
         }
@@ -217,7 +217,7 @@ abstract class AbstractAPIImpl {
 
         try {
             getResource(relativePath, null, arguments).delete();
-        } catch (final ClientWebException ex) {
+        } catch (final Exception ex) {
             handleException(ex);
         }
     }
@@ -239,7 +239,7 @@ abstract class AbstractAPIImpl {
 
         try {
             return getResource(relativePath, null, arguments).delete(responseClass);
-        } catch (final ClientWebException ex) {
+        } catch (final Exception ex) {
             handleException(ex);
             return null;
         }
@@ -406,12 +406,17 @@ abstract class AbstractAPIImpl {
      * most cases, an appropriate Terremark error is also returned, which contains more details on why the API call
      * failed. This method, throws specific exceptions for the various error conditions.
      *
-     * @param ex Root cause.
+     * @param exception Root cause.
      * @throws TerremarkException More specific exception.
      */
     @SuppressWarnings("PMD")
-    private static void handleException(final ClientWebException ex) throws TerremarkException {
+    private static void handleException(final Exception exception) throws TerremarkException {
+        if (!(exception instanceof ClientWebException)) {
+            throw new TerremarkException(exception);
+        }
+
         TerremarkError error = null;
+        ClientWebException ex = (ClientWebException) exception;
 
         if (ex.getResponse() != null) {
             String contentType = ex.getResponse().getHeaders().getFirst(HttpHeaders.CONTENT_TYPE);

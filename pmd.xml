@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="4.3" timestamp="2012-06-25T23:18:11.043">
+<pmd version="4.3" timestamp="2012-06-27T15:07:13.673">
+<file name="/home/seshu/terremark-api/src/main/java/com/terremark/impl/AbstractAPIImpl.java">
+<violation beginline="132" endline="132" begincolumn="28" endcolumn="36" rule="AvoidCatchingGenericException" ruleset="Basic Rules" package="com.terremark.impl" class="AbstractAPIImpl" externalInfoUrl="http://pmd.sourceforge.net/rules/strictexception.html#AvoidCatchingGenericException" priority="3">
+Avoid catching generic exceptions such as NullPointerException, RuntimeException, Exception in try-catch block
+</violation>
+<violation beginline="176" endline="176" begincolumn="24" endcolumn="32" rule="AvoidCatchingGenericException" ruleset="Basic Rules" package="com.terremark.impl" class="AbstractAPIImpl" externalInfoUrl="http://pmd.sourceforge.net/rules/strictexception.html#AvoidCatchingGenericException" priority="3">
+Avoid catching generic exceptions such as NullPointerException, RuntimeException, Exception in try-catch block
+</violation>
+<violation beginline="199" endline="199" begincolumn="24" endcolumn="32" rule="AvoidCatchingGenericException" ruleset="Basic Rules" package="com.terremark.impl" class="AbstractAPIImpl" externalInfoUrl="http://pmd.sourceforge.net/rules/strictexception.html#AvoidCatchingGenericException" priority="3">
+Avoid catching generic exceptions such as NullPointerException, RuntimeException, Exception in try-catch block
+</violation>
+<violation beginline="220" endline="220" begincolumn="24" endcolumn="32" rule="AvoidCatchingGenericException" ruleset="Basic Rules" package="com.terremark.impl" class="AbstractAPIImpl" method="delete" externalInfoUrl="http://pmd.sourceforge.net/rules/strictexception.html#AvoidCatchingGenericException" priority="3">
+Avoid catching generic exceptions such as NullPointerException, RuntimeException, Exception in try-catch block
+</violation>
+<violation beginline="242" endline="242" begincolumn="24" endcolumn="32" rule="AvoidCatchingGenericException" ruleset="Basic Rules" package="com.terremark.impl" class="AbstractAPIImpl" externalInfoUrl="http://pmd.sourceforge.net/rules/strictexception.html#AvoidCatchingGenericException" priority="3">
+Avoid catching generic exceptions such as NullPointerException, RuntimeException, Exception in try-catch block
+</violation>
+</file>
 <suppressedviolation filename="/home/seshu/terremark-api/src/main/java/com/terremark/handlers/BasicAuthenticationHandler.java" suppressiontype="annotation" msg="A method/constructor shouldn't explicitly throw java.lang.Exception" usermsg=""/>
 <suppressedviolation filename="/home/seshu/terremark-api/src/main/java/com/terremark/handlers/BasicAuthenticationHandler.java" suppressiontype="annotation" msg="A method/constructor shouldn't explicitly throw java.lang.Exception" usermsg=""/>
 <suppressedviolation filename="/home/seshu/terremark-api/src/main/java/com/terremark/handlers/CloudApiAuthenticationHandler.java" suppressiontype="annotation" msg="A method/constructor shouldn't explicitly throw java.lang.Exception" usermsg=""/>
@@ -11,6 +28,7 @@
 <suppressedviolation filename="/home/seshu/terremark-api/src/main/java/com/terremark/impl/AbstractAPIImpl.java" suppressiontype="annotation" msg="A switch statement does not contain a break" usermsg=""/>
 <suppressedviolation filename="/home/seshu/terremark-api/src/main/java/com/terremark/impl/AbstractAPIImpl.java" suppressiontype="annotation" msg="This abstract class does not have any abstract methods" usermsg=""/>
 <suppressedviolation filename="/home/seshu/terremark-api/src/main/java/com/terremark/impl/AbstractAPIImpl.java" suppressiontype="annotation" msg="Avoid catching generic exceptions such as NullPointerException, RuntimeException, Exception in try-catch block" usermsg=""/>
+<suppressedviolation filename="/home/seshu/terremark-api/src/main/java/com/terremark/impl/AbstractAPIImpl.java" suppressiontype="annotation" msg="Local variable 'ex' could be declared final" usermsg=""/>
 <suppressedviolation filename="/home/seshu/terremark-api/src/main/java/com/terremark/impl/AbstractAPIImpl.java" suppressiontype="annotation" msg="Local variable 'contentType' could be declared final" usermsg=""/>
 <suppressedviolation filename="/home/seshu/terremark-api/src/main/java/com/terremark/impl/AbstractAPIImpl.java" suppressiontype="annotation" msg="Avoid instantiating new objects inside loops" usermsg=""/>
 <suppressedviolation filename="/home/seshu/terremark-api/src/main/java/com/terremark/impl/AbstractAPIImpl.java" suppressiontype="annotation" msg="Avoid instantiating new objects inside loops" usermsg=""/>

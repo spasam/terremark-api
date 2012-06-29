@@ -18,7 +18,6 @@ package com.terremark.exception;
 import java.util.Date;
 
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.wink.client.ClientRuntimeException;
 import org.junit.Test;
 
 import com.terremark.AbstractTestBase;
@@ -115,7 +114,7 @@ public class ExceptionsTest extends AbstractTestBase {
      * @throws Exception
      */
     @Order(5)
-    @Test(expected = ClientRuntimeException.class)
+    @Test(expected = TerremarkException.class)
     public void testJson() throws Exception {
         final PropertiesBuilder props = new PropertiesBuilder().setEndPoint(ENDPOINT_URL).setAccessKey(ACCESS_KEY)
                         .setAPIVersion(VERSION).setContentType(ContentType.JSON).setPrivateKey(PRIVATE_KEY)

@@ -150,6 +150,12 @@
             <version>4.10</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.wink</groupId>
+            <artifactId>wink-component-test-support</artifactId>
+            <version>1.2.0-incubating</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

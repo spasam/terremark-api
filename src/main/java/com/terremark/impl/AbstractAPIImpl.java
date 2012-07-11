@@ -433,6 +433,8 @@ abstract class AbstractAPIImpl {
                                 + "HTTP status: {}. HTTP message: {}. HTTP Headers: {}",
                                 new Object[] {Integer.toString(ex.getResponse().getStatusCode()),
                                                 ex.getResponse().getMessage(), ex.getResponse().getHeaders(), ignore});
+            } finally {
+                ex.getResponse().consumeContent();
             }
         }
 

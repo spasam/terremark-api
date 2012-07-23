@@ -67,7 +67,7 @@ public class AbstractTestBase {
                     "A747EB1561E54CD66AE81D91207F7C0B0B81FE2AA0C60FDB31594F1424278505B1AECBE653C3889173FAC08F94020126CFE4E9520803DF330AC8720E727D60E6"};
 
     /** Whether to use Livespec environment or Beta environment */
-    protected static final boolean LIVESPEC = true;
+    protected static final boolean LIVESPEC = false;
 
     /** API endpoint URL */
     protected static final String ENDPOINT_URL = LIVESPEC ? LIVESPEC_CONFIG[0] : REAL_ENV_CONFIG[0];
@@ -85,7 +85,7 @@ public class AbstractTestBase {
     protected static final String PRIVATE_KEY = LIVESPEC ? LIVESPEC_CONFIG[4] : REAL_ENV_CONFIG[4];
 
     /** API version to use */
-    protected static final Version VERSION = Version.VERSION_2_12;
+    protected static final Version VERSION = Version.VERSION_2_13;
 
     /** Content type to use */
     protected static final ContentType CONTENT_TYPE = ContentType.XML;

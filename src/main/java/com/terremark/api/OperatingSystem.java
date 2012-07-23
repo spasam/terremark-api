@@ -84,5 +84,4 @@ public final class OperatingSystem extends Resource {
     public void setConfigurationOptions(final VirtualMachineConfigurationOptions value) {
         this.configurationOptions = value;
     }
-
 }

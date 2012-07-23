@@ -78,5 +78,4 @@ public final class LayoutRow extends Resource {
         }
         return groups;
     }
-
 }

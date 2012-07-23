@@ -84,5 +84,4 @@ public final class CreateRnatAssociation extends ToStringGenerator {
     public void setIpAddress(final Reference value) {
         this.ipAddress = value;
     }
-
 }

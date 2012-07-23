@@ -120,5 +120,4 @@ public final class ComputePool extends Entity {
         }
         return virtualMachines;
     }
-
 }

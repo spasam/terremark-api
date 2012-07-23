@@ -141,5 +141,4 @@ public final class Role extends Resource {
         }
         return businessOperations;
     }
-
 }

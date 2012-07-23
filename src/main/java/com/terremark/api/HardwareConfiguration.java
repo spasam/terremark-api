@@ -110,5 +110,4 @@ public final class HardwareConfiguration extends Resource {
         }
         return nics;
     }
-
 }

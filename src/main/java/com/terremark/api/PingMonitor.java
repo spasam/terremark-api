@@ -38,5 +38,4 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "PingMonitor")
 @javax.xml.bind.annotation.XmlRootElement(name = "PingMonitor")
 public final class PingMonitor extends ConfigurableInternetServiceMonitor {
-
 }

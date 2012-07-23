@@ -84,5 +84,4 @@ public final class TicketGroups extends Resource {
     public void setHistory(final Reference value) {
         this.history = value;
     }
-
 }

@@ -36,9 +36,9 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;extension base="{}CreateVirtualMachineRequest">
  *       &lt;sequence>
  *         &lt;element name="OperatingSystem" type="{}Reference"/>
- *         &lt;element name="Disks" type="{}Disks"/>
+ *         &lt;element name="Disks" type="{}Disks" minOccurs="0"/>
  *         &lt;element name="NetworkAdapterSettings" type="{}NetworkAdapterSettings"/>
- *         &lt;element name="DetachedDisks" type="{}DetachedVirtualDiskReferences"/>
+ *         &lt;element name="DetachedDisks" type="{}DetachedVirtualDiskReferences" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>
@@ -101,5 +101,4 @@ public final class CreateBlankVirtualMachine extends CreateVirtualMachineRequest
         }
         return detachedDisks;
     }
-
 }

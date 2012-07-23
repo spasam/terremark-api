@@ -313,5 +313,4 @@ public final class Ticket extends Resource {
         }
         return history;
     }
-
 }

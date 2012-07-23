@@ -79,5 +79,4 @@ public final class TrustedNetworkGroup extends Entity {
         }
         return internetServices;
     }
-
 }

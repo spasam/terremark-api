@@ -70,5 +70,4 @@ public final class DeviceTagList extends Resource {
         }
         return this.deviceTags;
     }
-
 }

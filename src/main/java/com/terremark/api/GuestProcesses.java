@@ -70,5 +70,4 @@ public final class GuestProcesses extends Resource {
         }
         return this.guestProcesses;
     }
-
 }

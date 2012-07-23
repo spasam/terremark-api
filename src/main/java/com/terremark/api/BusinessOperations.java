@@ -70,5 +70,4 @@ public final class BusinessOperations extends Resource {
         }
         return this.businessOperations;
     }
-
 }

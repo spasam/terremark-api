@@ -70,5 +70,4 @@ public final class FirewallAcls extends Resource {
         }
         return this.firewallAcls;
     }
-
 }

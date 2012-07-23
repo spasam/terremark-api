@@ -103,5 +103,4 @@ public final class ComputePoolMemoryUsage extends Resource {
         }
         return memoryUsageDetailSummary;
     }
-
 }

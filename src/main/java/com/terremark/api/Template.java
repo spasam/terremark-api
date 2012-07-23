@@ -226,5 +226,4 @@ public final class Template extends Resource {
         }
         return computeMatrix;
     }
-
 }

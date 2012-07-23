@@ -85,5 +85,4 @@ public final class CreateSshKey extends ToStringGenerator {
     public void setName(final String value) {
         this.name = value;
     }
-
 }

@@ -67,5 +67,4 @@ public final class Time extends ToStringGenerator {
     public void setCurrentServerTime(final XMLGregorianCalendar value) {
         this.currentServerTime = value;
     }
-
 }

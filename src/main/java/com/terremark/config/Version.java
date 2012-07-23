@@ -28,7 +28,9 @@ public enum Version {
     /** Version 2.11 */
     VERSION_2_11("2011-10-01"),
     /** Version 2.12 */
-    VERSION_2_12("2012-03-01");
+    VERSION_2_12("2012-03-01"),
+    /** Version 2.13 */
+    VERSION_2_13("2012-06-01");
 
     /** Version release date */
     private final String versionDate;

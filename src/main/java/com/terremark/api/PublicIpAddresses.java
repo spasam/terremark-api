@@ -70,5 +70,4 @@ public final class PublicIpAddresses extends ToStringGenerator {
         }
         return this.publicIps;
     }
-
 }

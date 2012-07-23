@@ -99,5 +99,4 @@ public final class CreateHttpMonitor extends CreateInternetServiceMonitorRequest
         }
         return responseCodes;
     }
-
 }

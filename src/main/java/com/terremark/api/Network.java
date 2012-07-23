@@ -169,5 +169,4 @@ public final class Network extends Resource {
     public void setIpAddresses(final IpAddresses value) {
         this.ipAddresses = value;
     }
-
 }

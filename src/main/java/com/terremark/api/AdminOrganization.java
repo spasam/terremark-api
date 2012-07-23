@@ -190,5 +190,4 @@ public final class AdminOrganization extends Entity {
     public void setAlertNotification(final AlertNotification value) {
         this.alertNotification = value;
     }
-
 }

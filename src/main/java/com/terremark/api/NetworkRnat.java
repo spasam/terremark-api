@@ -84,5 +84,4 @@ public final class NetworkRnat extends Resource {
     public void setRnat(final Reference value) {
         this.rnat = value;
     }
-
 }

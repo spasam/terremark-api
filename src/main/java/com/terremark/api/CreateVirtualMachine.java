@@ -63,5 +63,4 @@ public final class CreateVirtualMachine extends CreateOsTemplateVirtualMachineRe
     public void setTemplate(final Reference value) {
         this.template = value;
     }
-
 }

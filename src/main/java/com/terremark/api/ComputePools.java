@@ -70,5 +70,4 @@ public final class ComputePools extends ToStringGenerator {
         }
         return this.computePools;
     }
-
 }

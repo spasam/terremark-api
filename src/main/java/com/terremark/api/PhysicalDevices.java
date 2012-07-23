@@ -70,5 +70,4 @@ public final class PhysicalDevices extends Resource {
         }
         return this.physicalDevices;
     }
-
 }

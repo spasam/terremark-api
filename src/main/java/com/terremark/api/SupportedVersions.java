@@ -71,5 +71,4 @@ public final class SupportedVersions extends ToStringGenerator {
         }
         return this.versionInfos;
     }
-
 }

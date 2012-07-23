@@ -90,5 +90,4 @@ public final class CreateTrustedNetworkGroup extends ToStringGenerator {
         }
         return networks;
     }
-
 }

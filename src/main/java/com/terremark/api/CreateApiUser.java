@@ -84,5 +84,4 @@ public final class CreateApiUser extends ToStringGenerator {
     public void setUserRole(final UserRole value) {
         this.userRole = value;
     }
-
 }

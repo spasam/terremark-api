@@ -70,5 +70,4 @@ public final class VirtualMachines extends ToStringGenerator {
         }
         return this.virtualMachines;
     }
-
 }

@@ -148,5 +148,4 @@ public final class PhysicalServer extends PhysicalDevice {
     public void setLicensedSoftware(final PhysicalDeviceLicensedSoftware value) {
         this.licensedSoftware = value;
     }
-
 }

@@ -70,5 +70,4 @@ public final class BandwidthPeriods extends ToStringGenerator {
         }
         return this.bandwidthPeriods;
     }
-
 }

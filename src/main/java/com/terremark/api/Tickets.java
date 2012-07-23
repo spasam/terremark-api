@@ -70,5 +70,4 @@ public final class Tickets extends Resource {
         }
         return this.ticketReferences;
     }
-
 }

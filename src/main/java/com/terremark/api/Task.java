@@ -215,5 +215,4 @@ public final class Task extends Resource {
     public void setInitiatedBy(final Reference value) {
         this.initiatedBy = value;
     }
-
 }

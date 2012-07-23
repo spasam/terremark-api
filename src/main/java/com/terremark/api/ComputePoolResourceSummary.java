@@ -173,5 +173,4 @@ public final class ComputePoolResourceSummary extends Resource {
     public void setVirtualMachines(final VirtualMachineResourceSummary value) {
         this.virtualMachines = value;
     }
-
 }

@@ -126,5 +126,4 @@ public final class IpAddress extends Resource {
     public void setReserved(final Boolean value) {
         this.reserved = value;
     }
-
 }

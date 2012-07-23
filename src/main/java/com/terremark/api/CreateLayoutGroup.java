@@ -106,5 +106,4 @@ public final class CreateLayoutGroup extends ToStringGenerator {
     public void setName(final String value) {
         this.name = value;
     }
-
 }

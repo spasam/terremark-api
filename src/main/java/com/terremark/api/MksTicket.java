@@ -128,5 +128,4 @@ public final class MksTicket extends ToStringGenerator {
     public void setTicket(final String value) {
         this.ticket = value;
     }
-
 }

@@ -22,7 +22,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * <p>
@@ -39,6 +41,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="LastName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="Password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="UserSecurityQuestions" type="{}SecurityQuestions" minOccurs="0"/>
+ *         &lt;element name="PasswordExpirationDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>
@@ -46,7 +49,7 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "UserCredentials", propOrder = {"firstName", "lastName", "password", "userSecurityQuestions"})
+@XmlType(name = "UserCredentials", propOrder = {"firstName", "lastName", "password", "userSecurityQuestions", "passwordExpirationDate"})
 @javax.xml.bind.annotation.XmlRootElement(name = "UserCredentials")
 public final class UserCredentials extends Resource {
 
@@ -59,6 +62,9 @@ public final class UserCredentials extends Resource {
     @XmlElementWrapper(name = "UserSecurityQuestions")
     @XmlElement(name = "SecurityQuestion")
     protected List<SecurityQuestion> userSecurityQuestions;
+    @XmlElement(name = "PasswordExpirationDate", nillable = true)
+    @XmlSchemaType(name = "dateTime")
+    protected XMLGregorianCalendar passwordExpirationDate;
 
     /**
      * Gets the value of the firstName property.
@@ -121,4 +127,21 @@ public final class UserCredentials extends Resource {
         return userSecurityQuestions;
     }
 
+    /**
+     * Gets the value of the passwordExpirationDate property.
+     *
+     * @return possible object is {@link XMLGregorianCalendar }
+     */
+    public XMLGregorianCalendar getPasswordExpirationDate() {
+        return passwordExpirationDate;
+    }
+
+    /**
+     * Sets the value of the passwordExpirationDate property.
+     *
+     * @param value allowed object is {@link XMLGregorianCalendar }
+     */
+    public void setPasswordExpirationDate(final XMLGregorianCalendar value) {
+        this.passwordExpirationDate = value;
+    }
 }

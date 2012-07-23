@@ -61,5 +61,4 @@ public final class CreateLayoutRow extends ToStringGenerator {
     public void setName(final String value) {
         this.name = value;
     }
-
 }

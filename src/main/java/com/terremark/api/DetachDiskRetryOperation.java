@@ -84,5 +84,4 @@ public final class DetachDiskRetryOperation extends Resource {
     public void setVirtualMachine(final Reference value) {
         this.virtualMachine = value;
     }
-
 }

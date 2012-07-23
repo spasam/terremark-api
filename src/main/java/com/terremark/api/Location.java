@@ -105,5 +105,4 @@ public final class Location extends Resource {
     public void setISO3166(final String value) {
         this.iso3166 = value;
     }
-
 }

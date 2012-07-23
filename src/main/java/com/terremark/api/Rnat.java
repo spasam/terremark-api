@@ -110,5 +110,4 @@ public final class Rnat extends Resource {
         }
         return associations;
     }
-
 }

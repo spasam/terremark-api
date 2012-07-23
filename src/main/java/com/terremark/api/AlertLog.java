@@ -133,5 +133,4 @@ public final class AlertLog extends ToStringGenerator {
         }
         return this.alerts;
     }
-
 }

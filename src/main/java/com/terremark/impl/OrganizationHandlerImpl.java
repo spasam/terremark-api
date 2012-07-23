@@ -18,6 +18,7 @@ package com.terremark.impl;
 import static com.terremark.config.Version.VERSION_2_10;
 import static com.terremark.config.Version.VERSION_2_11;
 import static com.terremark.config.Version.VERSION_2_12;
+import static com.terremark.config.Version.VERSION_2_13;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,6 +49,7 @@ import com.terremark.api.Catalog;
 import com.terremark.api.CatalogEntry;
 import com.terremark.api.CatalogEntryConfiguration;
 import com.terremark.api.CatalogLog;
+import com.terremark.api.ChangePassword;
 import com.terremark.api.Configuration;
 import com.terremark.api.Contact;
 import com.terremark.api.Contacts;
@@ -276,6 +278,14 @@ final class OrganizationHandlerImpl extends AbstractAPIImpl implements Organizat
     @Override
     public void catalogRemove(final String catalogId) throws TerremarkException {
         delete(VERSION_2_10, "/admin/catalog/{catalogId}", catalogId);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ChangePassword changePassword(ChangePassword obj) throws TerremarkException {
+        return put(VERSION_2_13, "/changePassword/", ChangePassword.class, obj, new Object[] {});
     }
 
     /**

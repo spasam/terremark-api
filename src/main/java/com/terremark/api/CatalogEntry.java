@@ -131,5 +131,4 @@ public final class CatalogEntry extends Entity {
         }
         return files;
     }
-
 }

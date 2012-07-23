@@ -84,5 +84,4 @@ public final class StorageDevice extends PhysicalDevice {
     public void setAssignedIpAddresses(final AssignedIpAddresses value) {
         this.assignedIpAddresses = value;
     }
-
 }

@@ -147,5 +147,4 @@ public final class AlertRule extends Resource {
     public void setConfiguration(final Configuration value) {
         this.configuration = value;
     }
-
 }

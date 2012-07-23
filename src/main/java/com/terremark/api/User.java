@@ -320,5 +320,4 @@ public final class User extends Entity {
     public void setApiKeys(final ApiKeys value) {
         this.apiKeys = value;
     }
-
 }

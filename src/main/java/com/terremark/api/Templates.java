@@ -57,5 +57,4 @@ public final class Templates extends Resource {
         }
         return families;
     }
-
 }

@@ -39,6 +39,7 @@ import com.terremark.api.Catalog;
 import com.terremark.api.CatalogEntry;
 import com.terremark.api.CatalogEntryConfiguration;
 import com.terremark.api.CatalogLog;
+import com.terremark.api.ChangePassword;
 import com.terremark.api.Configuration;
 import com.terremark.api.Contact;
 import com.terremark.api.Contacts;
@@ -349,6 +350,23 @@ public interface OrganizationHandler {
      * @throws TerremarkException If an error occurs removing the catalog item.
      */
     void catalogRemove(String catalogId) throws TerremarkException;
+
+    /**
+     * This call does not require authentication. It edits the password for a specified user. If successful, the call returns information
+     * regarding the user name that was modified.  This call should only be used in response to "ExpiredPassword" (HTTP error code 401)
+     * error message.
+     * <p/>
+     * {@code UserName} is required and must match a user in the organization. {@code OldPassword} is required, must match the password of
+     * the user in the organization identified by {@code UserName}, and is subject to the system limitations for failed login attempts.
+     * {@code NewPassword} is required and must comply with the password complexity rules for the organization.
+     * <p/>
+     * Note: This call requires no confirmation of the password. Such confirmation should be performed prior to submitting the call.
+     *
+     * @param obj Change password request.
+     * @return Change password information with the {@code UserName} for whom the password was successfully changed.
+     * @throws TerremarkException If an error occurs changing the user's password.
+     */
+    ChangePassword changePassword(ChangePassword obj) throws TerremarkException;
 
     /**
      * Returns administrative information regarding an organization.

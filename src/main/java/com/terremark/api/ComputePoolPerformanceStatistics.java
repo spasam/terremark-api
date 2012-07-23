@@ -84,5 +84,4 @@ public final class ComputePoolPerformanceStatistics extends Resource {
     public void setDaily(final ComputePoolPerformanceStatistic value) {
         this.daily = value;
     }
-
 }

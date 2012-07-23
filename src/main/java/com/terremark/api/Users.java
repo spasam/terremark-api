@@ -70,5 +70,4 @@ public final class Users extends Resource {
         }
         return this.users;
     }
-
 }

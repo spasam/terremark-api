@@ -70,5 +70,4 @@ public final class BackupInternetServices extends Resource {
         }
         return this.backupInternetServices;
     }
-
 }

@@ -70,5 +70,4 @@ public final class TrustedNetworkGroups extends Resource {
         }
         return this.trustedNetworkGroups;
     }
-
 }

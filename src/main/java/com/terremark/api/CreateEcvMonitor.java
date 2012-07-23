@@ -105,5 +105,4 @@ public final class CreateEcvMonitor extends CreateInternetServiceMonitorRequest 
     public void setReceiveString(final String value) {
         this.receiveString = value;
     }
-
 }

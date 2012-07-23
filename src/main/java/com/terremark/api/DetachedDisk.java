@@ -190,5 +190,4 @@ public final class DetachedDisk extends Resource {
     public void setPendingRetryOperation(final Reference value) {
         this.pendingRetryOperation = value;
     }
-
 }

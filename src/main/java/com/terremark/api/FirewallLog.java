@@ -84,5 +84,4 @@ public final class FirewallLog extends Entity {
     public void setExternalIpAddress(final ExternalHost value) {
         this.externalIpAddress = value;
     }
-
 }

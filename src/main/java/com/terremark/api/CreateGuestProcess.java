@@ -126,5 +126,4 @@ public final class CreateGuestProcess extends ToStringGenerator {
     public void setScript(final String value) {
         this.script = value;
     }
-
 }

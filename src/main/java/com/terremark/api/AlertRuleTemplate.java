@@ -105,5 +105,4 @@ public final class AlertRuleTemplate extends Resource {
     public void setThreshold(final Threshold value) {
         this.threshold = value;
     }
-
 }

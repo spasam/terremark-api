@@ -111,5 +111,4 @@ public final class AuthenticationLevels extends Resource {
     public void setHMACSHA512Enabled(final boolean value) {
         this.hmacsha512Enabled = value;
     }
-
 }

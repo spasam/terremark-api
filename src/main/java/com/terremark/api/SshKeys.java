@@ -70,5 +70,4 @@ public final class SshKeys extends Resource {
         }
         return this.sshKeys;
     }
-
 }

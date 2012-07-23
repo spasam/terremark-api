@@ -63,5 +63,4 @@ public final class RnatHostAssociation extends Resource {
     public void setIpAddress(final IpAddressReference value) {
         this.ipAddress = value;
     }
-
 }

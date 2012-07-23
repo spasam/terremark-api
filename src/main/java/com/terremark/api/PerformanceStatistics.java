@@ -103,5 +103,4 @@ public final class PerformanceStatistics extends Resource {
         }
         return virtualMachines;
     }
-
 }

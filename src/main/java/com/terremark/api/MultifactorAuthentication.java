@@ -186,5 +186,4 @@ public final class MultifactorAuthentication extends ToStringGenerator {
     public void setPin(final String value) {
         this.pin = value;
     }
-
 }

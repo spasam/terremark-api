@@ -89,5 +89,4 @@ public final class BandwidthUsage extends Resource {
         }
         return historicalUsages;
     }
-
 }

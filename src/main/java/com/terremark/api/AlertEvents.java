@@ -133,5 +133,4 @@ public final class AlertEvents extends ToStringGenerator {
         }
         return this.alertEvents;
     }
-
 }

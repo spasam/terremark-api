@@ -99,5 +99,4 @@ public final class HighAvailabilityRouter extends PhysicalDevice {
         }
         return devices;
     }
-
 }

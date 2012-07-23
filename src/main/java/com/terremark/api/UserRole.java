@@ -78,5 +78,4 @@ public final class UserRole extends Resource {
         }
         return environmentRoles;
     }
-
 }

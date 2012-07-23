@@ -84,5 +84,4 @@ public final class GuestProcess extends ToStringGenerator {
     public void setProcessId(final Integer value) {
         this.processId = value;
     }
-
 }

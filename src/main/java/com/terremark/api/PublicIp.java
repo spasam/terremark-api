@@ -78,5 +78,4 @@ public final class PublicIp extends Entity {
         }
         return internetServices;
     }
-
 }

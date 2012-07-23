@@ -68,5 +68,4 @@ public final class RnatConfiguration extends Resource {
         }
         return rnats;
     }
-
 }

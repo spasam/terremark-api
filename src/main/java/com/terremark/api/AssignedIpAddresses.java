@@ -57,5 +57,4 @@ public final class AssignedIpAddresses extends Resource {
         }
         return networks;
     }
-
 }

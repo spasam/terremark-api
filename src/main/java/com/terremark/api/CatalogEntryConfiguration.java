@@ -217,5 +217,4 @@ public final class CatalogEntryConfiguration extends Resource {
         }
         return networkMappings;
     }
-
 }

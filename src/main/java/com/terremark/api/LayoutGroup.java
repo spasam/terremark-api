@@ -89,5 +89,4 @@ public final class LayoutGroup extends Resource {
         }
         return physicalDevices;
     }
-
 }

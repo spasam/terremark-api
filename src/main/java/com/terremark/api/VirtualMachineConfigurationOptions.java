@@ -163,5 +163,4 @@ public final class VirtualMachineConfigurationOptions extends Resource {
         }
         return computeMatrix;
     }
-
 }

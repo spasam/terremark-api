@@ -105,5 +105,4 @@ public final class Contact extends Entity {
     public void setEmailAddress(final String value) {
         this.emailAddress = value;
     }
-
 }

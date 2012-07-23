@@ -103,5 +103,4 @@ public final class ComputePoolCpuUsage extends Resource {
         }
         return cpuUsageDetailSummary;
     }
-
 }

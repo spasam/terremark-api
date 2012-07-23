@@ -105,5 +105,4 @@ public final class CreateTicket extends ToStringGenerator {
     public void setDetails(final String value) {
         this.details = value;
     }
-
 }

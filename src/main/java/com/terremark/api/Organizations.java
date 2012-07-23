@@ -70,5 +70,4 @@ public final class Organizations extends Resource {
         }
         return this.organizations;
     }
-
 }

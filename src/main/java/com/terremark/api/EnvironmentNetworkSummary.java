@@ -133,5 +133,4 @@ public final class EnvironmentNetworkSummary extends Resource {
         }
         return trustedNetworkGroups;
     }
-
 }

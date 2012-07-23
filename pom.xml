@@ -162,9 +162,6 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
-                <excludes>
-                    <exclude>CloudAPI-2012-03-01.xsd</exclude>
-                </excludes>
             </resource>
             <resource>
                 <directory>${basedir}</directory>

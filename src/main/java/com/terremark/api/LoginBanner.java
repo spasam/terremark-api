@@ -80,5 +80,4 @@ public final class LoginBanner extends Resource {
     public void setText(final String value) {
         this.text = value;
     }
-
 }

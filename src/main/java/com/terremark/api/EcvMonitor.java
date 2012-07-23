@@ -105,5 +105,4 @@ public final class EcvMonitor extends ConfigurableInternetServiceMonitor {
     public void setReceiveString(final String value) {
         this.receiveString = value;
     }
-
 }

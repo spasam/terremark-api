@@ -63,5 +63,4 @@ public final class Configuration extends ToStringGenerator {
     public void setEmailConfiguration(final NotifyByEmailConfiguration value) {
         this.emailConfiguration = value;
     }
-
 }

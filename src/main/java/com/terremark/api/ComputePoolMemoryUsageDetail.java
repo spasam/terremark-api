@@ -102,5 +102,4 @@ public final class ComputePoolMemoryUsageDetail extends Resource {
         }
         return virtualMachines;
     }
-
 }

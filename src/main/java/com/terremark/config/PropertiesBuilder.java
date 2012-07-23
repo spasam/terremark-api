@@ -61,14 +61,14 @@ public class PropertiesBuilder {
 
     /**
      * Default constructor. Sets the context type to {@link ContentType#XML}, signature algorithm to
-     * {@link SignatureAlgorithm#HMAC_SHA256} and API version to {@link Version#VERSION_2_12}. API end point URL is set
+     * {@link SignatureAlgorithm#HMAC_SHA256} and API version to {@link Version#VERSION_2_13}. API end point URL is set
      * to the default value (https://services.enterprisecloud.terremark.com/cloudapi/ecloud).
      */
     public PropertiesBuilder() {
         this.uri = ENDPOINT_URL;
         this.contentType = ContentType.XML;
         this.signatureAlgorithm = SignatureAlgorithm.HMAC_SHA256;
-        this.version = Version.VERSION_2_12;
+        this.version = Version.VERSION_2_13;
     }
 
     /**

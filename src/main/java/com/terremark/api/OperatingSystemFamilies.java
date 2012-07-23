@@ -70,5 +70,4 @@ public final class OperatingSystemFamilies extends Resource {
         }
         return this.operatingSystemFamilies;
     }
-
 }

@@ -194,5 +194,4 @@ public final class Alert extends Resource {
     public void setAlertType(final AlertTypeEnum value) {
         this.alertType = value;
     }
-
 }

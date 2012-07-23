@@ -91,5 +91,4 @@ public final class AuditLog extends ToStringGenerator {
         }
         return this.auditLogItems;
     }
-
 }

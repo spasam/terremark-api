@@ -145,5 +145,4 @@ public final class NodeService extends Entity {
     public void setDescription(final String value) {
         this.description = value;
     }
-
 }

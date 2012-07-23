@@ -70,5 +70,4 @@ public final class Environments extends Resource {
         }
         return this.environments;
     }
-
 }

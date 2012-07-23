@@ -70,5 +70,4 @@ public final class Networks extends ToStringGenerator {
         }
         return this.networks;
     }
-
 }

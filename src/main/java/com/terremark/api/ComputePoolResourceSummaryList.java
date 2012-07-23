@@ -70,5 +70,4 @@ public final class ComputePoolResourceSummaryList extends Resource {
         }
         return this.computePoolResourceSummaries;
     }
-
 }

@@ -270,5 +270,4 @@ public final class CopyVirtualMachine extends ToStringGenerator {
         }
         return tags;
     }
-
 }

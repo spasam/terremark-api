@@ -105,5 +105,4 @@ public final class ApiKey extends Resource {
     public void setPrivateKey(final String value) {
         this.privateKey = value;
     }
-
 }

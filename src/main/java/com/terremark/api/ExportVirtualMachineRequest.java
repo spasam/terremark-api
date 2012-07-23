@@ -63,5 +63,4 @@ public final class ExportVirtualMachineRequest extends ToStringGenerator {
     public void setCatalogName(final String value) {
         this.catalogName = value;
     }
-
 }

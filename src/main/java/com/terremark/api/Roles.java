@@ -70,5 +70,4 @@ public final class Roles extends ToStringGenerator {
         }
         return this.roles;
     }
-
 }

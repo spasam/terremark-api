@@ -70,5 +70,4 @@ public final class AdminOrganizations extends Resource {
         }
         return this.adminOrganizations;
     }
-
 }

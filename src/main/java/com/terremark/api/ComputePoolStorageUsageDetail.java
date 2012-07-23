@@ -99,5 +99,4 @@ public final class ComputePoolStorageUsageDetail extends Resource {
         }
         return virtualMachines;
     }
-
 }

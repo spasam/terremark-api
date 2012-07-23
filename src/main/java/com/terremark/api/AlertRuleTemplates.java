@@ -70,5 +70,4 @@ public final class AlertRuleTemplates extends Resource {
         }
         return this.alertRuleTemplates;
     }
-
 }

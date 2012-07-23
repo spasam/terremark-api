@@ -232,5 +232,4 @@ public final class VirtualMachine extends Device {
     public void setPendingRetryOperation(final Reference value) {
         this.pendingRetryOperation = value;
     }
-
 }

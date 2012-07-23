@@ -57,5 +57,4 @@ public final class Catalog extends Resource {
         }
         return locations;
     }
-
 }

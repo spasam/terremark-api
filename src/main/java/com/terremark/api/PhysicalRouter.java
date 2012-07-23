@@ -105,5 +105,4 @@ public final class PhysicalRouter extends PhysicalDevice {
     public void setInsideIp(final String value) {
         this.insideIp = value;
     }
-
 }

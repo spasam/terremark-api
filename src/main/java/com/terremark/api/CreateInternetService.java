@@ -248,5 +248,4 @@ public final class CreateInternetService extends ToStringGenerator {
     public void setName(final String value) {
         this.name = value;
     }
-
 }

@@ -126,5 +126,4 @@ public final class LayoutRequest extends ToStringGenerator {
     public void setNewGroup(final String value) {
         this.newGroup = value;
     }
-
 }

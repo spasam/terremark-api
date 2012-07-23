@@ -127,5 +127,4 @@ public final class CopyIdenticalVirtualMachine extends ToStringGenerator {
     public void setName(final String value) {
         this.name = value;
     }
-
 }

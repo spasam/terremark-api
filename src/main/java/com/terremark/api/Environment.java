@@ -79,5 +79,4 @@ public final class Environment extends Entity {
         }
         return physicalDevices;
     }
-
 }

@@ -70,5 +70,4 @@ public final class DetachedDisks extends Resource {
         }
         return this.detachedDisks;
     }
-
 }

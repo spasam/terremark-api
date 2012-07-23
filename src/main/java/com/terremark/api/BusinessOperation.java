@@ -105,5 +105,4 @@ public final class BusinessOperation extends Resource {
     public void setIsAssignable(final Boolean value) {
         this.isAssignable = value;
     }
-
 }

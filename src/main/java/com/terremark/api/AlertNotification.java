@@ -63,5 +63,4 @@ public final class AlertNotification extends Resource {
     public void setAlertRules(final AlertRules value) {
         this.alertRules = value;
     }
-
 }

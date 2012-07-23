@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="RuleType" type="{}PasswordComplexityRuleTypeEnum"/>
  *         &lt;element name="CustomRules" type="{}CustomPasswordRules" minOccurs="0"/>
+ *         &lt;element name="PasswordExpiration" type="{}PasswordExpiration" minOccurs="0"/>
  *         &lt;element name="Description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
@@ -41,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PasswordComplexityRules", propOrder = {"ruleType", "customRules", "description"})
+@XmlType(name = "PasswordComplexityRules", propOrder = {"ruleType", "customRules", "passwordExpiration", "description"})
 @javax.xml.bind.annotation.XmlRootElement(name = "PasswordComplexityRules")
 public final class PasswordComplexityRules extends Resource {
 
@@ -49,6 +50,8 @@ public final class PasswordComplexityRules extends Resource {
     protected PasswordComplexityRuleTypeEnum ruleType;
     @XmlElement(name = "CustomRules", nillable = true)
     protected CustomPasswordRules customRules;
+    @XmlElement(name = "PasswordExpiration", nillable = true)
+    protected PasswordExpiration passwordExpiration;
     @XmlElement(name = "Description", nillable = true)
     protected String description;
 
@@ -89,6 +92,24 @@ public final class PasswordComplexityRules extends Resource {
     }
 
     /**
+     * Gets the value of the passwordExpiration property.
+     *
+     * @return possible object is {@link PasswordExpiration }
+     */
+    public PasswordExpiration getPasswordExpiration() {
+        return passwordExpiration;
+    }
+
+    /**
+     * Sets the value of the passwordExpiration property.
+     *
+     * @param value allowed object is {@link PasswordExpiration }
+     */
+    public void setPasswordExpiration(final PasswordExpiration value) {
+        this.passwordExpiration = value;
+    }
+
+    /**
      * Gets the value of the description property.
      *
      * @return possible object is {@link String }
@@ -105,5 +126,4 @@ public final class PasswordComplexityRules extends Resource {
     public void setDescription(final String value) {
         this.description = value;
     }
-
 }

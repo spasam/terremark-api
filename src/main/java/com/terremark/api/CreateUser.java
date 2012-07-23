@@ -206,5 +206,4 @@ public final class CreateUser extends ToStringGenerator {
         }
         return userSecurityQuestions;
     }
-
 }

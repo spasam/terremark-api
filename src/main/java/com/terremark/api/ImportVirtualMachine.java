@@ -99,5 +99,4 @@ public final class ImportVirtualMachine extends CreateVirtualMachineRequest {
         }
         return networkMappings;
     }
-
 }

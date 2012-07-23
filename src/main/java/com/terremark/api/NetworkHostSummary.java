@@ -70,5 +70,4 @@ public final class NetworkHostSummary extends ToStringGenerator {
         }
         return this.networks;
     }
-
 }

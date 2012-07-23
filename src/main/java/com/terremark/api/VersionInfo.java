@@ -85,5 +85,4 @@ public final class VersionInfo extends ToStringGenerator {
     public void setDeprecated(final Boolean value) {
         this.deprecated = value;
     }
-
 }

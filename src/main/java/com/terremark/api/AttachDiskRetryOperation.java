@@ -84,5 +84,4 @@ public final class AttachDiskRetryOperation extends Resource {
     public void setVirtualMachine(final Reference value) {
         this.virtualMachine = value;
     }
-
 }

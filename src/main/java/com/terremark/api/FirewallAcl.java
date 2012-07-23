@@ -190,5 +190,4 @@ public final class FirewallAcl extends Entity {
     public void setPortRange(final PortRange value) {
         this.portRange = value;
     }
-
 }

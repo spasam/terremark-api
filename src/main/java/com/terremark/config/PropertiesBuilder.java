@@ -255,7 +255,7 @@ public class PropertiesBuilder {
     }
 
     /**
-     * Set the API version to use. This is optional. If not specified, {@link Version#VERSION_2_12} will be used.
+     * Set the API version to use. This is optional. If not specified, {@link Version#VERSION_2_13} will be used.
      *
      * @param version API version to use.
      * @return The builder object reference.

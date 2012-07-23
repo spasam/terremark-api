@@ -10,7 +10,7 @@
     <item>
       <title>File: 44,
              Errors: 0,
-             Warnings: 224,
+             Warnings: 231,
              Infos: 0
       </title>
             <link>https://github.com/spasam/terremark-api/checkstyle.html</link>
@@ -77,7 +77,7 @@
                   0
                 </td>
                 <td>
-                  5
+                  6
                 </td>
                 <td>
                   0
@@ -175,7 +175,7 @@
                   0
                 </td>
                 <td>
-                  14
+                  15
                 </td>
                 <td>
                   0
@@ -217,7 +217,7 @@
                   0
                 </td>
                 <td>
-                  6
+                  11
                 </td>
                 <td>
                   0

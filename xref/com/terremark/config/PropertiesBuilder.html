@@ -71,14 +71,14 @@
 <a class="jxr_linenumber" name="61" href="#61">61</a>  
 <a class="jxr_linenumber" name="62" href="#62">62</a>      <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="63" href="#63">63</a>  <em class="jxr_javadoccomment">     * Default constructor. Sets the context type to {@link ContentType#XML}, signature algorithm to</em>
-<a class="jxr_linenumber" name="64" href="#64">64</a>  <em class="jxr_javadoccomment">     * {@link SignatureAlgorithm#HMAC_SHA256} and API version to {@link Version#VERSION_2_12}. API end point URL is set</em>
+<a class="jxr_linenumber" name="64" href="#64">64</a>  <em class="jxr_javadoccomment">     * {@link SignatureAlgorithm#HMAC_SHA256} and API version to {@link Version#VERSION_2_13}. API end point URL is set</em>
 <a class="jxr_linenumber" name="65" href="#65">65</a>  <em class="jxr_javadoccomment">     * to the default value (https://services.enterprisecloud.terremark.com/cloudapi/ecloud).</em>
 <a class="jxr_linenumber" name="66" href="#66">66</a>  <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="67" href="#67">67</a>      <strong class="jxr_keyword">public</strong> <a href="../../../com/terremark/config/PropertiesBuilder.html">PropertiesBuilder</a>() {
 <a class="jxr_linenumber" name="68" href="#68">68</a>          <strong class="jxr_keyword">this</strong>.uri = ENDPOINT_URL;
 <a class="jxr_linenumber" name="69" href="#69">69</a>          <strong class="jxr_keyword">this</strong>.contentType = ContentType.XML;
 <a class="jxr_linenumber" name="70" href="#70">70</a>          <strong class="jxr_keyword">this</strong>.signatureAlgorithm = SignatureAlgorithm.HMAC_SHA256;
-<a class="jxr_linenumber" name="71" href="#71">71</a>          <strong class="jxr_keyword">this</strong>.version = Version.VERSION_2_12;
+<a class="jxr_linenumber" name="71" href="#71">71</a>          <strong class="jxr_keyword">this</strong>.version = Version.VERSION_2_13;
 <a class="jxr_linenumber" name="72" href="#72">72</a>      }
 <a class="jxr_linenumber" name="73" href="#73">73</a>  
 <a class="jxr_linenumber" name="74" href="#74">74</a>      <em class="jxr_javadoccomment">/**</em>
@@ -265,7 +265,7 @@
 <a class="jxr_linenumber" name="255" href="#255">255</a>     }
 <a class="jxr_linenumber" name="256" href="#256">256</a> 
 <a class="jxr_linenumber" name="257" href="#257">257</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="258" href="#258">258</a> <em class="jxr_javadoccomment">     * Set the API version to use. This is optional. If not specified, {@link Version#VERSION_2_12} will be used.</em>
+<a class="jxr_linenumber" name="258" href="#258">258</a> <em class="jxr_javadoccomment">     * Set the API version to use. This is optional. If not specified, {@link Version#VERSION_2_13} will be used.</em>
 <a class="jxr_linenumber" name="259" href="#259">259</a> <em class="jxr_javadoccomment">     *</em>
 <a class="jxr_linenumber" name="260" href="#260">260</a> <em class="jxr_javadoccomment">     * @param version API version to use.</em>
 <a class="jxr_linenumber" name="261" href="#261">261</a> <em class="jxr_javadoccomment">     * @return The builder object reference.</em>

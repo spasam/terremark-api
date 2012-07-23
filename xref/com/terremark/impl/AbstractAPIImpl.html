@@ -443,108 +443,110 @@
 <a class="jxr_linenumber" name="433" href="#433">433</a>                                 + <span class="jxr_string">"HTTP status: {}. HTTP message: {}. HTTP Headers: {}"</span>,
 <a class="jxr_linenumber" name="434" href="#434">434</a>                                 <strong class="jxr_keyword">new</strong> Object[] {Integer.toString(ex.getResponse().getStatusCode()),
 <a class="jxr_linenumber" name="435" href="#435">435</a>                                                 ex.getResponse().getMessage(), ex.getResponse().getHeaders(), ignore});
-<a class="jxr_linenumber" name="436" href="#436">436</a>             }
-<a class="jxr_linenumber" name="437" href="#437">437</a>         }
-<a class="jxr_linenumber" name="438" href="#438">438</a> 
-<a class="jxr_linenumber" name="439" href="#439">439</a>         <strong class="jxr_keyword">if</strong> (ex.getResponse() != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="440" href="#440">440</a>             <strong class="jxr_keyword">switch</strong> (ex.getResponse().getStatusCode()) {
-<a class="jxr_linenumber" name="441" href="#441">441</a>             <strong class="jxr_keyword">case</strong> 400: <em class="jxr_comment">// Replay attack, clock skew etc</em>
-<a class="jxr_linenumber" name="442" href="#442">442</a>             <strong class="jxr_keyword">case</strong> 412: <em class="jxr_comment">// Invalid version</em>
-<a class="jxr_linenumber" name="443" href="#443">443</a>             <strong class="jxr_keyword">case</strong> 415: <em class="jxr_comment">// Unsupported media type</em>
-<a class="jxr_linenumber" name="444" href="#444">444</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../com/terremark/exception/InvalidRequestException.html">InvalidRequestException</a>(error, ex);
-<a class="jxr_linenumber" name="445" href="#445">445</a>             <strong class="jxr_keyword">case</strong> 401: <em class="jxr_comment">// Authentication failed</em>
-<a class="jxr_linenumber" name="446" href="#446">446</a>             <strong class="jxr_keyword">case</strong> 407: <em class="jxr_comment">// Proxy authentication required</em>
-<a class="jxr_linenumber" name="447" href="#447">447</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../com/terremark/exception/AuthenticationDeniedException.html">AuthenticationDeniedException</a>(error, ex);
-<a class="jxr_linenumber" name="448" href="#448">448</a>             <strong class="jxr_keyword">case</strong> 403:
-<a class="jxr_linenumber" name="449" href="#449">449</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../com/terremark/exception/AccessDeniedException.html">AccessDeniedException</a>(error, ex);
-<a class="jxr_linenumber" name="450" href="#450">450</a>             <strong class="jxr_keyword">case</strong> 404: <em class="jxr_comment">// Request object not found</em>
-<a class="jxr_linenumber" name="451" href="#451">451</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../com/terremark/exception/NotFoundException.html">NotFoundException</a>(error, ex);
-<a class="jxr_linenumber" name="452" href="#452">452</a>             <strong class="jxr_keyword">case</strong> 409:
-<a class="jxr_linenumber" name="453" href="#453">453</a>             <strong class="jxr_keyword">case</strong> 420:
-<a class="jxr_linenumber" name="454" href="#454">454</a>             <strong class="jxr_keyword">case</strong> 421:
-<a class="jxr_linenumber" name="455" href="#455">455</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../com/terremark/exception/RequestFailedException.html">RequestFailedException</a>(error, ex);
-<a class="jxr_linenumber" name="456" href="#456">456</a>             <strong class="jxr_keyword">case</strong> 500:
-<a class="jxr_linenumber" name="457" href="#457">457</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../com/terremark/exception/InternalServerException.html">InternalServerException</a>(error, ex);
-<a class="jxr_linenumber" name="458" href="#458">458</a>             <strong class="jxr_keyword">case</strong> 501:
-<a class="jxr_linenumber" name="459" href="#459">459</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../com/terremark/exception/NotImplementedException.html">NotImplementedException</a>(error, ex);
-<a class="jxr_linenumber" name="460" href="#460">460</a>             <strong class="jxr_keyword">case</strong> 503:
-<a class="jxr_linenumber" name="461" href="#461">461</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../com/terremark/exception/ServiceUnavailableException.html">ServiceUnavailableException</a>(error, ex);
-<a class="jxr_linenumber" name="462" href="#462">462</a>             <strong class="jxr_keyword">default</strong>: <em class="jxr_comment">// Just to make PMD happy</em>
-<a class="jxr_linenumber" name="463" href="#463">463</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../com/terremark/exception/TerremarkException.html">TerremarkException</a>(error, ex);
-<a class="jxr_linenumber" name="464" href="#464">464</a>             }
-<a class="jxr_linenumber" name="465" href="#465">465</a>         }
-<a class="jxr_linenumber" name="466" href="#466">466</a> 
-<a class="jxr_linenumber" name="467" href="#467">467</a>         <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../com/terremark/exception/TerremarkException.html">TerremarkException</a>(error, ex);
-<a class="jxr_linenumber" name="468" href="#468">468</a>     }
-<a class="jxr_linenumber" name="469" href="#469">469</a> 
-<a class="jxr_linenumber" name="470" href="#470">470</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="471" href="#471">471</a> <em class="jxr_javadoccomment">     * Generic method used for all HTTP calls. This is responsible for constructing rest client request and returning</em>
-<a class="jxr_linenumber" name="472" href="#472">472</a> <em class="jxr_javadoccomment">     * the response.</em>
-<a class="jxr_linenumber" name="473" href="#473">473</a> <em class="jxr_javadoccomment">     *</em>
-<a class="jxr_linenumber" name="474" href="#474">474</a> <em class="jxr_javadoccomment">     * @param relativePath Relative path.</em>
-<a class="jxr_linenumber" name="475" href="#475">475</a> <em class="jxr_javadoccomment">     * @param queryParams Query arguments.</em>
-<a class="jxr_linenumber" name="476" href="#476">476</a> <em class="jxr_javadoccomment">     * @param extraHeaders Additional headers.</em>
-<a class="jxr_linenumber" name="477" href="#477">477</a> <em class="jxr_javadoccomment">     * @param arguments Arguments for the path.</em>
-<a class="jxr_linenumber" name="478" href="#478">478</a> <em class="jxr_javadoccomment">     * @return Resource that can be deserialized as a response.</em>
-<a class="jxr_linenumber" name="479" href="#479">479</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="480" href="#480">480</a>     <strong class="jxr_keyword">private</strong> <a href="../../../com/terremark/api/Resource.html">Resource</a> getResource(<strong class="jxr_keyword">final</strong> String relativePath, <strong class="jxr_keyword">final</strong> Map&lt;String, String&gt; queryParams,
-<a class="jxr_linenumber" name="481" href="#481">481</a>                     <strong class="jxr_keyword">final</strong> Map&lt;String, String&gt; extraHeaders, <strong class="jxr_keyword">final</strong> Object... arguments) {
-<a class="jxr_linenumber" name="482" href="#482">482</a>         <strong class="jxr_keyword">final</strong> UriBuilder builder = UriBuilder.fromPath(properties.getUri() + relativePath);
-<a class="jxr_linenumber" name="483" href="#483">483</a> 
-<a class="jxr_linenumber" name="484" href="#484">484</a>         <strong class="jxr_keyword">if</strong> (queryParams != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="485" href="#485">485</a>             <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">final</strong> Map.Entry&lt;String, String&gt; entry : queryParams.entrySet()) {
-<a class="jxr_linenumber" name="486" href="#486">486</a>                 <strong class="jxr_keyword">if</strong> (entry.getValue() != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="487" href="#487">487</a>                     builder.queryParam(entry.getKey(), entry.getValue());
-<a class="jxr_linenumber" name="488" href="#488">488</a>                 }
-<a class="jxr_linenumber" name="489" href="#489">489</a>             }
-<a class="jxr_linenumber" name="490" href="#490">490</a>         }
-<a class="jxr_linenumber" name="491" href="#491">491</a> 
-<a class="jxr_linenumber" name="492" href="#492">492</a>         <a href="../../../com/terremark/api/Resource.html">Resource</a> resource = client.resource(builder.build(arguments)).accept(getContentType());
+<a class="jxr_linenumber" name="436" href="#436">436</a>             } <strong class="jxr_keyword">finally</strong> {
+<a class="jxr_linenumber" name="437" href="#437">437</a>                 ex.getResponse().consumeContent();
+<a class="jxr_linenumber" name="438" href="#438">438</a>             }
+<a class="jxr_linenumber" name="439" href="#439">439</a>         }
+<a class="jxr_linenumber" name="440" href="#440">440</a> 
+<a class="jxr_linenumber" name="441" href="#441">441</a>         <strong class="jxr_keyword">if</strong> (ex.getResponse() != <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="442" href="#442">442</a>             <strong class="jxr_keyword">switch</strong> (ex.getResponse().getStatusCode()) {
+<a class="jxr_linenumber" name="443" href="#443">443</a>             <strong class="jxr_keyword">case</strong> 400: <em class="jxr_comment">// Replay attack, clock skew etc</em>
+<a class="jxr_linenumber" name="444" href="#444">444</a>             <strong class="jxr_keyword">case</strong> 412: <em class="jxr_comment">// Invalid version</em>
+<a class="jxr_linenumber" name="445" href="#445">445</a>             <strong class="jxr_keyword">case</strong> 415: <em class="jxr_comment">// Unsupported media type</em>
+<a class="jxr_linenumber" name="446" href="#446">446</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../com/terremark/exception/InvalidRequestException.html">InvalidRequestException</a>(error, ex);
+<a class="jxr_linenumber" name="447" href="#447">447</a>             <strong class="jxr_keyword">case</strong> 401: <em class="jxr_comment">// Authentication failed</em>
+<a class="jxr_linenumber" name="448" href="#448">448</a>             <strong class="jxr_keyword">case</strong> 407: <em class="jxr_comment">// Proxy authentication required</em>
+<a class="jxr_linenumber" name="449" href="#449">449</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../com/terremark/exception/AuthenticationDeniedException.html">AuthenticationDeniedException</a>(error, ex);
+<a class="jxr_linenumber" name="450" href="#450">450</a>             <strong class="jxr_keyword">case</strong> 403:
+<a class="jxr_linenumber" name="451" href="#451">451</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../com/terremark/exception/AccessDeniedException.html">AccessDeniedException</a>(error, ex);
+<a class="jxr_linenumber" name="452" href="#452">452</a>             <strong class="jxr_keyword">case</strong> 404: <em class="jxr_comment">// Request object not found</em>
+<a class="jxr_linenumber" name="453" href="#453">453</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../com/terremark/exception/NotFoundException.html">NotFoundException</a>(error, ex);
+<a class="jxr_linenumber" name="454" href="#454">454</a>             <strong class="jxr_keyword">case</strong> 409:
+<a class="jxr_linenumber" name="455" href="#455">455</a>             <strong class="jxr_keyword">case</strong> 420:
+<a class="jxr_linenumber" name="456" href="#456">456</a>             <strong class="jxr_keyword">case</strong> 421:
+<a class="jxr_linenumber" name="457" href="#457">457</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../com/terremark/exception/RequestFailedException.html">RequestFailedException</a>(error, ex);
+<a class="jxr_linenumber" name="458" href="#458">458</a>             <strong class="jxr_keyword">case</strong> 500:
+<a class="jxr_linenumber" name="459" href="#459">459</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../com/terremark/exception/InternalServerException.html">InternalServerException</a>(error, ex);
+<a class="jxr_linenumber" name="460" href="#460">460</a>             <strong class="jxr_keyword">case</strong> 501:
+<a class="jxr_linenumber" name="461" href="#461">461</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../com/terremark/exception/NotImplementedException.html">NotImplementedException</a>(error, ex);
+<a class="jxr_linenumber" name="462" href="#462">462</a>             <strong class="jxr_keyword">case</strong> 503:
+<a class="jxr_linenumber" name="463" href="#463">463</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../com/terremark/exception/ServiceUnavailableException.html">ServiceUnavailableException</a>(error, ex);
+<a class="jxr_linenumber" name="464" href="#464">464</a>             <strong class="jxr_keyword">default</strong>: <em class="jxr_comment">// Just to make PMD happy</em>
+<a class="jxr_linenumber" name="465" href="#465">465</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../com/terremark/exception/TerremarkException.html">TerremarkException</a>(error, ex);
+<a class="jxr_linenumber" name="466" href="#466">466</a>             }
+<a class="jxr_linenumber" name="467" href="#467">467</a>         }
+<a class="jxr_linenumber" name="468" href="#468">468</a> 
+<a class="jxr_linenumber" name="469" href="#469">469</a>         <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../com/terremark/exception/TerremarkException.html">TerremarkException</a>(error, ex);
+<a class="jxr_linenumber" name="470" href="#470">470</a>     }
+<a class="jxr_linenumber" name="471" href="#471">471</a> 
+<a class="jxr_linenumber" name="472" href="#472">472</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="473" href="#473">473</a> <em class="jxr_javadoccomment">     * Generic method used for all HTTP calls. This is responsible for constructing rest client request and returning</em>
+<a class="jxr_linenumber" name="474" href="#474">474</a> <em class="jxr_javadoccomment">     * the response.</em>
+<a class="jxr_linenumber" name="475" href="#475">475</a> <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="476" href="#476">476</a> <em class="jxr_javadoccomment">     * @param relativePath Relative path.</em>
+<a class="jxr_linenumber" name="477" href="#477">477</a> <em class="jxr_javadoccomment">     * @param queryParams Query arguments.</em>
+<a class="jxr_linenumber" name="478" href="#478">478</a> <em class="jxr_javadoccomment">     * @param extraHeaders Additional headers.</em>
+<a class="jxr_linenumber" name="479" href="#479">479</a> <em class="jxr_javadoccomment">     * @param arguments Arguments for the path.</em>
+<a class="jxr_linenumber" name="480" href="#480">480</a> <em class="jxr_javadoccomment">     * @return Resource that can be deserialized as a response.</em>
+<a class="jxr_linenumber" name="481" href="#481">481</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="482" href="#482">482</a>     <strong class="jxr_keyword">private</strong> <a href="../../../com/terremark/api/Resource.html">Resource</a> getResource(<strong class="jxr_keyword">final</strong> String relativePath, <strong class="jxr_keyword">final</strong> Map&lt;String, String&gt; queryParams,
+<a class="jxr_linenumber" name="483" href="#483">483</a>                     <strong class="jxr_keyword">final</strong> Map&lt;String, String&gt; extraHeaders, <strong class="jxr_keyword">final</strong> Object... arguments) {
+<a class="jxr_linenumber" name="484" href="#484">484</a>         <strong class="jxr_keyword">final</strong> UriBuilder builder = UriBuilder.fromPath(properties.getUri() + relativePath);
+<a class="jxr_linenumber" name="485" href="#485">485</a> 
+<a class="jxr_linenumber" name="486" href="#486">486</a>         <strong class="jxr_keyword">if</strong> (queryParams != <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="487" href="#487">487</a>             <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">final</strong> Map.Entry&lt;String, String&gt; entry : queryParams.entrySet()) {
+<a class="jxr_linenumber" name="488" href="#488">488</a>                 <strong class="jxr_keyword">if</strong> (entry.getValue() != <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="489" href="#489">489</a>                     builder.queryParam(entry.getKey(), entry.getValue());
+<a class="jxr_linenumber" name="490" href="#490">490</a>                 }
+<a class="jxr_linenumber" name="491" href="#491">491</a>             }
+<a class="jxr_linenumber" name="492" href="#492">492</a>         }
 <a class="jxr_linenumber" name="493" href="#493">493</a> 
-<a class="jxr_linenumber" name="494" href="#494">494</a>         <strong class="jxr_keyword">if</strong> (extraHeaders != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="495" href="#495">495</a>             <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">final</strong> Map.Entry&lt;String, String&gt; entry : extraHeaders.entrySet()) {
-<a class="jxr_linenumber" name="496" href="#496">496</a>                 <strong class="jxr_keyword">if</strong> (entry.getValue() != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="497" href="#497">497</a>                     resource = resource.header(entry.getKey(), entry.getValue());
-<a class="jxr_linenumber" name="498" href="#498">498</a>                 }
-<a class="jxr_linenumber" name="499" href="#499">499</a>             }
-<a class="jxr_linenumber" name="500" href="#500">500</a>         }
-<a class="jxr_linenumber" name="501" href="#501">501</a> 
-<a class="jxr_linenumber" name="502" href="#502">502</a>         <strong class="jxr_keyword">return</strong> resource;
-<a class="jxr_linenumber" name="503" href="#503">503</a>     }
-<a class="jxr_linenumber" name="504" href="#504">504</a> 
-<a class="jxr_linenumber" name="505" href="#505">505</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="506" href="#506">506</a> <em class="jxr_javadoccomment">     * Used by {@code put}/{@code post}/{@code delete} requests. This just calls</em>
-<a class="jxr_linenumber" name="507" href="#507">507</a> <em class="jxr_javadoccomment">     * {@link #getResource(String, Map, Map, Object...)}. Sets {@code Content-Type} header if the request entity is not</em>
-<a class="jxr_linenumber" name="508" href="#508">508</a> <em class="jxr_javadoccomment">     * null. If the request entity is null, this method sets the {@code Content-Length} header to zero.</em>
-<a class="jxr_linenumber" name="509" href="#509">509</a> <em class="jxr_javadoccomment">     *</em>
-<a class="jxr_linenumber" name="510" href="#510">510</a> <em class="jxr_javadoccomment">     * @param relativePath Relative path of the request.</em>
-<a class="jxr_linenumber" name="511" href="#511">511</a> <em class="jxr_javadoccomment">     * @param arguments Arguments for building the URL.</em>
-<a class="jxr_linenumber" name="512" href="#512">512</a> <em class="jxr_javadoccomment">     * @return The resource on which to execute the HTTP request.</em>
-<a class="jxr_linenumber" name="513" href="#513">513</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="514" href="#514">514</a>     @SuppressWarnings(<span class="jxr_string">"PMD.UnusedPrivateMethod"</span>)
-<a class="jxr_linenumber" name="515" href="#515">515</a>     <strong class="jxr_keyword">private</strong> &lt;T&gt; <a href="../../../com/terremark/api/Resource.html">Resource</a> getResource(<strong class="jxr_keyword">final</strong> String relativePath, <strong class="jxr_keyword">final</strong> T requestEntity, <strong class="jxr_keyword">final</strong> Object... arguments) {
-<a class="jxr_linenumber" name="516" href="#516">516</a>         <strong class="jxr_keyword">final</strong> <a href="../../../com/terremark/api/Resource.html">Resource</a> resource = getResource(relativePath, <strong class="jxr_keyword">null</strong>, <strong class="jxr_keyword">null</strong>, arguments);
-<a class="jxr_linenumber" name="517" href="#517">517</a> 
-<a class="jxr_linenumber" name="518" href="#518">518</a>         <strong class="jxr_keyword">if</strong> (requestEntity == <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="519" href="#519">519</a>             <strong class="jxr_keyword">return</strong> resource.header(HttpHeaders.CONTENT_LENGTH, <span class="jxr_string">"0"</span>);
-<a class="jxr_linenumber" name="520" href="#520">520</a>         }
-<a class="jxr_linenumber" name="521" href="#521">521</a> 
-<a class="jxr_linenumber" name="522" href="#522">522</a>         <strong class="jxr_keyword">return</strong> resource.header(HttpHeaders.CONTENT_TYPE, getContentType());
-<a class="jxr_linenumber" name="523" href="#523">523</a>     }
-<a class="jxr_linenumber" name="524" href="#524">524</a> 
-<a class="jxr_linenumber" name="525" href="#525">525</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="526" href="#526">526</a> <em class="jxr_javadoccomment">     * Returns the content type as configured by the user.</em>
-<a class="jxr_linenumber" name="527" href="#527">527</a> <em class="jxr_javadoccomment">     *</em>
-<a class="jxr_linenumber" name="528" href="#528">528</a> <em class="jxr_javadoccomment">     * @return Content type.</em>
-<a class="jxr_linenumber" name="529" href="#529">529</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="530" href="#530">530</a>     <strong class="jxr_keyword">private</strong> String getContentType() {
-<a class="jxr_linenumber" name="531" href="#531">531</a>         <strong class="jxr_keyword">if</strong> (properties.getContentType() == ContentType.XML) {
-<a class="jxr_linenumber" name="532" href="#532">532</a>             <strong class="jxr_keyword">return</strong> MediaType.APPLICATION_XML;
-<a class="jxr_linenumber" name="533" href="#533">533</a>         }
-<a class="jxr_linenumber" name="534" href="#534">534</a> 
-<a class="jxr_linenumber" name="535" href="#535">535</a>         <strong class="jxr_keyword">return</strong> MediaType.APPLICATION_JSON;
-<a class="jxr_linenumber" name="536" href="#536">536</a>     }
-<a class="jxr_linenumber" name="537" href="#537">537</a> }
+<a class="jxr_linenumber" name="494" href="#494">494</a>         <a href="../../../com/terremark/api/Resource.html">Resource</a> resource = client.resource(builder.build(arguments)).accept(getContentType());
+<a class="jxr_linenumber" name="495" href="#495">495</a> 
+<a class="jxr_linenumber" name="496" href="#496">496</a>         <strong class="jxr_keyword">if</strong> (extraHeaders != <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="497" href="#497">497</a>             <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">final</strong> Map.Entry&lt;String, String&gt; entry : extraHeaders.entrySet()) {
+<a class="jxr_linenumber" name="498" href="#498">498</a>                 <strong class="jxr_keyword">if</strong> (entry.getValue() != <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="499" href="#499">499</a>                     resource = resource.header(entry.getKey(), entry.getValue());
+<a class="jxr_linenumber" name="500" href="#500">500</a>                 }
+<a class="jxr_linenumber" name="501" href="#501">501</a>             }
+<a class="jxr_linenumber" name="502" href="#502">502</a>         }
+<a class="jxr_linenumber" name="503" href="#503">503</a> 
+<a class="jxr_linenumber" name="504" href="#504">504</a>         <strong class="jxr_keyword">return</strong> resource;
+<a class="jxr_linenumber" name="505" href="#505">505</a>     }
+<a class="jxr_linenumber" name="506" href="#506">506</a> 
+<a class="jxr_linenumber" name="507" href="#507">507</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="508" href="#508">508</a> <em class="jxr_javadoccomment">     * Used by {@code put}/{@code post}/{@code delete} requests. This just calls</em>
+<a class="jxr_linenumber" name="509" href="#509">509</a> <em class="jxr_javadoccomment">     * {@link #getResource(String, Map, Map, Object...)}. Sets {@code Content-Type} header if the request entity is not</em>
+<a class="jxr_linenumber" name="510" href="#510">510</a> <em class="jxr_javadoccomment">     * null. If the request entity is null, this method sets the {@code Content-Length} header to zero.</em>
+<a class="jxr_linenumber" name="511" href="#511">511</a> <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="512" href="#512">512</a> <em class="jxr_javadoccomment">     * @param relativePath Relative path of the request.</em>
+<a class="jxr_linenumber" name="513" href="#513">513</a> <em class="jxr_javadoccomment">     * @param arguments Arguments for building the URL.</em>
+<a class="jxr_linenumber" name="514" href="#514">514</a> <em class="jxr_javadoccomment">     * @return The resource on which to execute the HTTP request.</em>
+<a class="jxr_linenumber" name="515" href="#515">515</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="516" href="#516">516</a>     @SuppressWarnings(<span class="jxr_string">"PMD.UnusedPrivateMethod"</span>)
+<a class="jxr_linenumber" name="517" href="#517">517</a>     <strong class="jxr_keyword">private</strong> &lt;T&gt; <a href="../../../com/terremark/api/Resource.html">Resource</a> getResource(<strong class="jxr_keyword">final</strong> String relativePath, <strong class="jxr_keyword">final</strong> T requestEntity, <strong class="jxr_keyword">final</strong> Object... arguments) {
+<a class="jxr_linenumber" name="518" href="#518">518</a>         <strong class="jxr_keyword">final</strong> <a href="../../../com/terremark/api/Resource.html">Resource</a> resource = getResource(relativePath, <strong class="jxr_keyword">null</strong>, <strong class="jxr_keyword">null</strong>, arguments);
+<a class="jxr_linenumber" name="519" href="#519">519</a> 
+<a class="jxr_linenumber" name="520" href="#520">520</a>         <strong class="jxr_keyword">if</strong> (requestEntity == <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="521" href="#521">521</a>             <strong class="jxr_keyword">return</strong> resource.header(HttpHeaders.CONTENT_LENGTH, <span class="jxr_string">"0"</span>);
+<a class="jxr_linenumber" name="522" href="#522">522</a>         }
+<a class="jxr_linenumber" name="523" href="#523">523</a> 
+<a class="jxr_linenumber" name="524" href="#524">524</a>         <strong class="jxr_keyword">return</strong> resource.header(HttpHeaders.CONTENT_TYPE, getContentType());
+<a class="jxr_linenumber" name="525" href="#525">525</a>     }
+<a class="jxr_linenumber" name="526" href="#526">526</a> 
+<a class="jxr_linenumber" name="527" href="#527">527</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="528" href="#528">528</a> <em class="jxr_javadoccomment">     * Returns the content type as configured by the user.</em>
+<a class="jxr_linenumber" name="529" href="#529">529</a> <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="530" href="#530">530</a> <em class="jxr_javadoccomment">     * @return Content type.</em>
+<a class="jxr_linenumber" name="531" href="#531">531</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="532" href="#532">532</a>     <strong class="jxr_keyword">private</strong> String getContentType() {
+<a class="jxr_linenumber" name="533" href="#533">533</a>         <strong class="jxr_keyword">if</strong> (properties.getContentType() == ContentType.XML) {
+<a class="jxr_linenumber" name="534" href="#534">534</a>             <strong class="jxr_keyword">return</strong> MediaType.APPLICATION_XML;
+<a class="jxr_linenumber" name="535" href="#535">535</a>         }
+<a class="jxr_linenumber" name="536" href="#536">536</a> 
+<a class="jxr_linenumber" name="537" href="#537">537</a>         <strong class="jxr_keyword">return</strong> MediaType.APPLICATION_JSON;
+<a class="jxr_linenumber" name="538" href="#538">538</a>     }
+<a class="jxr_linenumber" name="539" href="#539">539</a> }
 </pre>
 <hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
 </html>

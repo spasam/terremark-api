@@ -73,7 +73,7 @@ public final class VersionAndDateProvider {
      */
     public String getDate() {
         // SimpleDateFormat is not thread safe, so we always create one
-        final SimpleDateFormat sdf = new SimpleDateFormat(HTTP_HEADER_DATE_FORMAT, Locale.getDefault());
+        final SimpleDateFormat sdf = new SimpleDateFormat(HTTP_HEADER_DATE_FORMAT, Locale.ENGLISH);
         sdf.setTimeZone(TerremarkConstants.GMT_TIME_ZONE);
 
         return sdf.format(new Date(System.currentTimeMillis() - clockSkew));
